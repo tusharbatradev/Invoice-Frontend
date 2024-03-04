@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ProfileButton from "./ProfileButton";
+import DashboardPage from "./DashboardPage";
+import axios from "axios";
 
 function Dashboard() {
 	const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
@@ -14,14 +16,15 @@ function Dashboard() {
 			navigate("/Login");
 		}
 	}, []);
+
 	return (
-		<Stack padding={"10px 10px 0px 10px"} height={"97vh"} sx={{ backgroundColor: '#eeeff1' }}>
+		<Stack direction={'row'} spacing={'20px'} padding={"10px"} height={"97vh"} sx={{ backgroundColor: '#eeeff1' }}>
 			<Box
 				sx={{
 					backgroundColor: "#0c1526",
-					width: "17.5%",
+					width: "20%",
 					height: "100%",
-					borderRadius: "8px",	
+					borderRadius: "8px",
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'space-between'
@@ -32,7 +35,7 @@ function Dashboard() {
 					<ProfileButton />
 				</Box>
 			</Box>
-
+			<DashboardPage />
 		</Stack>
 	);
 }

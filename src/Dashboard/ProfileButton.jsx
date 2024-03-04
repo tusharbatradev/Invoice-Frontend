@@ -18,11 +18,6 @@ function ProfileButton() {
             >
                 <ProfileIcon /> Profile
             </Box>
-            <Box sx={{padding:'5px'}}>
-                <Typography color={'#fff'}>
-                    Powered by __web_builders__
-                </Typography>
-            </Box>
 
         </Box>)
 }

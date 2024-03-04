@@ -5,7 +5,7 @@ import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 export const UserIcon=()=> {
     return(<>
@@ -46,6 +46,12 @@ export const InvoiceIcon=()=> {
 export const ProfileIcon=()=> {
     return(<>
         <AccountCircleIcon sx={{ fontSize: '30px' }} />
+    </>)
+}
+
+export const TransactionIcon=()=> {
+    return(<>
+        <ReceiptLongIcon />
     </>)
 }
 
