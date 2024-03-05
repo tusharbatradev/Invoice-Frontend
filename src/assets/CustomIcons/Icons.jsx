@@ -6,6 +6,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export const UserIcon=()=> {
     return(<>
@@ -52,6 +53,12 @@ export const ProfileIcon=()=> {
 export const TransactionIcon=()=> {
     return(<>
         <ReceiptLongIcon />
+    </>)
+}
+
+export const BackIcon=()=> {
+    return(<>
+        <KeyboardBackspaceIcon />
     </>)
 }
 
