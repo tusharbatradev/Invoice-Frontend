@@ -1,7 +1,16 @@
 import { Typography, Box, Stack, TextField, Button } from "@mui/material"
 import { InvoiceIcon } from "../assets/CustomIcons/Icons"
 
-function AmountDetails() {
+function AmountDetails({ formData, setFormData, generateInvoice }) {
+    const handleChange = (fieldName, value) => {
+        setFormData({
+            ...formData,
+            invoice: {
+                ...formData.invoice,
+                [fieldName]: value
+            }
+        });
+    };
     return (<>
         {/* Total Amount Details */}
         <Stack padding={'16px'} spacing={'16px'}>
@@ -16,67 +25,98 @@ function AmountDetails() {
 
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                     <Typography fontFamily={'Poppins'} fontWeight={500}>
-                        Amount
+                        Total Amount
                     </Typography>
-                    <TextField value={'₹ 400'} sx={{
-                        "& .MuiInputBase-root": {
-                            height: "30px",
-                            borderRadius: "8px",
-                            fontFamily: 'Poppins',
-                            fontWeight: 600,
-                            "&.Mui-focused fieldset": {
-                                borderColor: "#555555",
+                    <TextField
+                        value={formData.invoice.grandTotal}
+                        onChange={handleChange}
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                height: "30px",
+                                borderRadius: "8px",
+                                fontFamily: 'Poppins',
+                                fontWeight: 600,
+                                "&.Mui-focused fieldset": {
+                                    borderColor: "#555555",
+                                },
                             },
-                        },
-                    }} />
+                        }} />
                 </Stack>
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                     <Typography fontFamily={'Poppins'} fontWeight={500}>
                         GST
                     </Typography>
-                    <TextField value={'₹ 100'} sx={{
-                        "& .MuiInputBase-root": {
-                            height: "30px",
-                            borderRadius: "8px",
-                            fontFamily: 'Poppins',
-                            fontWeight: 600,
-                            "&.Mui-focused fieldset": {
-                                borderColor: "#555555",
+                    <TextField
+                        // value={formData.amountPaid.gst}
+                        onChange={handleChange}
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                height: "30px",
+                                borderRadius: "8px",
+                                fontFamily: 'Poppins',
+                                fontWeight: 600,
+                                "&.Mui-focused fieldset": {
+                                    borderColor: "#555555",
+                                },
                             },
-                        },
-                    }} />
+                        }} />
                 </Stack>
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                     <Typography fontFamily={'Poppins'} fontWeight={500}>
-                        Total Amount
+                        Discount
                     </Typography>
-                    <TextField value={'₹ 500'} sx={{
-                        "& .MuiInputBase-root": {
-                            height: "30px",
-                            borderRadius: "8px",
-                            fontFamily: 'Poppins',
-                            fontWeight: 600,
-                            "&.Mui-focused fieldset": {
-                                borderColor: "#555555",
+                    <TextField
+                        // value={formData.invoice.discount}
+                        onChange={handleChange}
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                height: "30px",
+                                borderRadius: "8px",
+                                fontFamily: 'Poppins',
+                                fontWeight: 600,
+                                "&.Mui-focused fieldset": {
+                                    borderColor: "#555555",
+                                },
                             },
-                        },
-                    }} />
+                        }} />
                 </Stack>
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                     <Typography fontFamily={'Poppins'} fontWeight={500}>
                         Amount Paid
                     </Typography>
-                    <TextField sx={{
-                        "& .MuiInputBase-root": {
-                            height: "30px",
-                            borderRadius: "8px",
-                            fontFamily : 'Poppins',
-                            fontWeight : 600,
-                            "&.Mui-focused fieldset": {
-                                borderColor: "#555555",
+                    <TextField
+                        value={formData.invoice.amountPaid}
+                        onChange={handleChange}
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                height: "30px",
+                                borderRadius: "8px",
+                                fontFamily: 'Poppins',
+                                fontWeight: 600,
+                                "&.Mui-focused fieldset": {
+                                    borderColor: "#555555",
+                                },
                             },
-                        },
-                    }} />
+                        }} />
+                </Stack>
+                <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+                    <Typography fontFamily={'Poppins'} fontWeight={500}>
+                        Remaining Balance
+                    </Typography>
+                    <TextField
+                        value={formData.invoice.remainingBalance}
+                        onChange={handleChange}
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                height: "30px",
+                                borderRadius: "8px",
+                                fontFamily: 'Poppins',
+                                fontWeight: 600,
+                                "&.Mui-focused fieldset": {
+                                    borderColor: "#555555",
+                                },
+                            },
+                        }} />
                 </Stack>
             </Box>
 
@@ -91,7 +131,10 @@ function AmountDetails() {
                 "&:hover": {
                     backgroundColor: "#1d2659",
                 },
-            }} variant="contained">
+            }}
+                variant="contained"
+                onClick={generateInvoice}
+            >
                 Generate Invoice <InvoiceIcon />
             </Button>
         </Stack>
