@@ -8,7 +8,6 @@ import axios from 'axios';
 
 function InvoicePage() {
     const [formData, setFormData] = useState({
-        // Initialize the form data with empty values
         customer: {
             firstName: '',
             lastName: '',

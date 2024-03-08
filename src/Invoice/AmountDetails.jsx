@@ -29,7 +29,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     </Typography>
                     <TextField
                         value={formData.invoice.grandTotal}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange('grandTotal', e.target.value)}
                         sx={{
                             "& .MuiInputBase-root": {
                                 height: "30px",
@@ -48,7 +48,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     </Typography>
                     <TextField
                         // value={formData.amountPaid.gst}
-                        onChange={handleChange}
+                        // onChange={(e) => handleChange('gst', e.target.value)}
                         sx={{
                             "& .MuiInputBase-root": {
                                 height: "30px",
@@ -66,8 +66,8 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                         Discount
                     </Typography>
                     <TextField
-                        // value={formData.invoice.discount}
-                        onChange={handleChange}
+                        value={formData.invoice.discount}
+                        onChange={(e) => handleChange('discount', e.target.value)}
                         sx={{
                             "& .MuiInputBase-root": {
                                 height: "30px",
@@ -86,7 +86,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     </Typography>
                     <TextField
                         value={formData.invoice.amountPaid}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange('amountPaid', e.target.value)}
                         sx={{
                             "& .MuiInputBase-root": {
                                 height: "30px",
@@ -105,7 +105,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     </Typography>
                     <TextField
                         value={formData.invoice.remainingBalance}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange('remainingBalance', e.target.value)}
                         sx={{
                             "& .MuiInputBase-root": {
                                 height: "30px",
