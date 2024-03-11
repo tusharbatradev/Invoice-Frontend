@@ -12,10 +12,53 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
+import SearchIcon from '@mui/icons-material/Search';
+import CategoryIcon from '@mui/icons-material/Category';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export const UserIcon = () => {
     return (<>
         <PersonIcon />
+    </>)
+}
+
+export const CrossCancelIcon = () => {
+    return (<>
+        <CancelIcon sx={{color : '#df6161'}} />
+    </>)
+}
+
+export const SuccessIcon = () => {
+    return (<>
+        <ThumbUpAltIcon />
+    </>)
+}
+
+export const AddIcon = () => {
+    return (<>
+        <AddCircleIcon />
+    </>)
+}
+
+
+export const StockLimit = () => {
+    return (<>
+        <ProductionQuantityLimitsIcon />
+    </>)
+}
+
+export const Search = () => {
+    return (<>
+        <SearchIcon sx={{ color: '#959595' }} />
+    </>)
+}
+
+export const Category = () => {
+    return (<>
+        <CategoryIcon sx={{ color: '#959595' }} />
     </>)
 }
 

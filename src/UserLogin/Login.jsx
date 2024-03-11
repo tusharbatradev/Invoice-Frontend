@@ -13,6 +13,7 @@ import {
 	CloseEyeIcon,
 	OpenEyeIcon,
 	UserIcon,
+	SuccessIcon
 } from "../assets/CustomIcons/Icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -78,7 +79,7 @@ function LoginPage() {
 	const handleCloseSnackBar = () => {
 		setTimeout(() => {
 			setSnackBar(false);
-		}, 800);
+		}, 1000);
 	};
 
 	return (
@@ -230,11 +231,26 @@ function LoginPage() {
 			</Stack>
 
 			<Snackbar
+				ContentProps={{
+					sx: {
+						backgroundColor: 'green'
+					}
+				}}
 				open={snackBar}
 				autoHideDuration={6000}
-				message={snackBarMessage}
-				onClose={handleCloseSnackBar}
-				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+				message={
+					<Typography sx={{
+						width: '100%',
+						display: 'flex',
+						alignItems: 'center',
+						gap: '8px',
+						fontFamily: 'Poppins'
+					}}>
+						{snackBarMessage} <SuccessIcon />
+					</Typography>
+					}
+			onClose={handleCloseSnackBar}
+			anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
 		</Stack>
 	);

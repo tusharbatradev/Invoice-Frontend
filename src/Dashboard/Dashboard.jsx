@@ -8,6 +8,7 @@ import DashboardPage from "./DashboardPage";
 import axios from "axios";
 import Invoice from "../Invoice/Invoice";
 import Bill from "../Bill/Bill";
+import Product from "../Product/Product";
 
 function Dashboard() {
 	const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
@@ -43,7 +44,8 @@ function Dashboard() {
 			</Box>
 			{/* <DashboardPage /> */}
 			{/* <Invoice /> */}
-			<Bill />
+			{/* <Bill /> */}
+			<Product />
 		</Stack>
 	);
 }
