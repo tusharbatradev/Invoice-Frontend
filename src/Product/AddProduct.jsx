@@ -16,7 +16,13 @@ function AddProduct({setshowAddProduct}) {
         try {
             const response = await axios.post(
                 "http://localhost:3001/product",
-                product
+                product,
+                {
+                    headers:{
+                        'Content-Type': 'application/json',
+                        "Authorization":localStorage.getItem("token")
+                    }
+                }
             );
             console.log(response);
             if (response.status === 200) {
@@ -81,6 +87,11 @@ function AddProduct({setshowAddProduct}) {
                         renderInput={(params) =>
                             <TextField
                                 placeholder="Availability"
+                                value={product.availability}
+                                onChange={(e)=>{
+                                    const status=e.target.value==='Available' ? true : false
+                                    setProduct({...product,availability:status})
+                                }}
                                 sx={{
                                     "& .MuiInputBase-root": {
                                         height: "45px",

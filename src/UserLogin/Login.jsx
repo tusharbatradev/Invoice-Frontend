@@ -31,6 +31,7 @@ function LoginPage() {
 		username: "",
 		password: "",
 	});
+	const [token,setToken]=useState(null);
 	const dispatch = useDispatch();
 
 	// Login Functionality
@@ -63,6 +64,7 @@ function LoginPage() {
 			if (response.status === 200) {
 				setSnackBarMessage(response.data.msg);
 				dispatch(Login());
+				localStorage.setItem('token',response?.data?.token);
 				console.log("Login Successfully");
 
 				setTimeout(() => {

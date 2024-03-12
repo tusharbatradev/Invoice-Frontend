@@ -43,9 +43,9 @@ function Dashboard() {
 				</Box>
 			</Box>
 			{/* <DashboardPage /> */}
-			{/* <Invoice /> */}
+			<Invoice />
 			{/* <Bill /> */}
-			<Product />
+			{/* <Product /> */}
 		</Stack>
 	);
 }

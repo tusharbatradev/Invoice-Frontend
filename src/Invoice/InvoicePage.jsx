@@ -23,7 +23,7 @@ function InvoicePage() {
             makingCharges: '',
             productId: '',
             productQuantity: '',
-            id : ''
+            id: ''
         }],
         // oldProducts: {},
         invoice: {
@@ -36,10 +36,16 @@ function InvoicePage() {
     });
 
     const generateInvoice = () => {
-        axios.post('http://localhost:3001/invoice/', formData)
+        axios.post('http://localhost:3001/invoice/', formData, {
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem("token")
+            }
+        })
             .then(response => {
-                console.log('Invoice generated successfully:', response.data);
-            } 
+                console.log('Invoice generated successfully:',
+                    response.data);
+            }
             )
             .catch(error => {
                 console.error(error);
