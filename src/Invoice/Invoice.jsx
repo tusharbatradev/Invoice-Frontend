@@ -2,9 +2,13 @@ import { Divider, IconButton, Stack, Typography } from "@mui/material"
 import { BackIcon } from "../assets/CustomIcons/Icons"
 import BusinessDetails from "./CustomerDetails"
 import InvoicePage from "./InvoicePage"
+import { useNavigate } from "react-router-dom"
 
 
 function Invoice() {
+
+    const navigate = useNavigate();
+
     return (<>
         <Stack spacing={'8px'} sx={{
             backgroundColor: '#fff',
@@ -15,13 +19,13 @@ function Invoice() {
             {/* Page Heading */}
             <Typography sx={{
                 fontFamily: 'Poppins',
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: 500,
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px'
             }}>
-                <IconButton>
+                <IconButton onClick={() => navigate('/dashboard')}>
                     <BackIcon />
                 </IconButton>
                 Create Sales Invoice

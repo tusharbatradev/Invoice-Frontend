@@ -2,14 +2,19 @@ import { useState } from "react";
 import { Divider, Stack, Typography, Box, TextField, Autocomplete, Button, Snackbar } from "@mui/material"
 import { AddIcon, SuccessIcon } from "../assets/CustomIcons/Icons"
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { updateProductField } from "../redux/Slices/productSlice";
 
-function AddProduct({setshowAddProduct}) {
+function AddProduct({ setshowAddProduct,setReload }) {
 
+    const product = useSelector(state => state.product);
     const [snackBar, setSnackBar] = useState(false);
-    const [product, setProduct] = useState({
-        productName: "",
-        availability: false
-    });
+    const [snackBarColor , setSnackBarColor] = useState('')
+    const dispatch = useDispatch();
+
+    const handleInputChange = (key, value) => {
+        dispatch(updateProductField({ key, value }));
+    };
 
     const submit = async () => {
         setSnackBar(true);
@@ -18,19 +23,22 @@ function AddProduct({setshowAddProduct}) {
                 "http://localhost:3001/product",
                 product,
                 {
-                    headers:{
+                    headers: {
                         'Content-Type': 'application/json',
-                        "Authorization":localStorage.getItem("token")
+                        "Authorization": localStorage.getItem("token")
                     }
                 }
-            );
+            )
+            setSnackBarColor("green")
             console.log(response);
             if (response.status === 200) {
                 // setSnackBarMessage(response.data.msg);
+                setReload(true);
                 console.log("Added Successfully");
             }
         } catch (error) {
             // setSnackBarMessage("Cannot Add");
+            setSnackBarColor("green")
             console.warn(error);
         }
     };
@@ -61,9 +69,7 @@ function AddProduct({setshowAddProduct}) {
                     <TextField
                         placeholder="Product Name"
                         value={product.productName}
-                        onChange={(e) =>
-                            setProduct({ ...product, productName: e.target.value })
-                        }
+                        onChange={(e) => handleInputChange('productName', e.target.value)}
                         sx={{
                             "& .MuiInputBase-root": {
                                 height: "45px",
@@ -87,11 +93,8 @@ function AddProduct({setshowAddProduct}) {
                         renderInput={(params) =>
                             <TextField
                                 placeholder="Availability"
-                                value={product.availability}
-                                onChange={(e)=>{
-                                    const status=e.target.value==='Available' ? true : false
-                                    setProduct({...product,availability:status})
-                                }}
+                                value={product.availability ? 'Available' : 'Not Available'}
+                                onChange={(e) => handleInputChange('availability', e.target.value === 'Available')}
                                 sx={{
                                     "& .MuiInputBase-root": {
                                         height: "45px",
@@ -127,18 +130,18 @@ function AddProduct({setshowAddProduct}) {
             <Snackbar
                 ContentProps={{
                     sx: {
-                        backgroundColor: 'green'
+                        backgroundColor: snackBarColor
                     }
                 }}
                 open={snackBar}
                 autoHideDuration={1000}
                 message={
                     <Typography sx={{
-                        width : '100%',
-                        display : 'flex',
-                        alignItems : 'center',
-                        gap : '8px',
-                        fontFamily : 'Poppins'
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontFamily: 'Poppins'
                     }}>
                         Product Added <SuccessIcon />
                     </Typography>

@@ -1,7 +1,7 @@
 import { Typography, Stack, Container, Box } from "@mui/material";
 import MenuList from "./MenuList";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ProfileButton from "./ProfileButton";
 import DashboardPage from "./DashboardPage";
@@ -9,6 +9,7 @@ import axios from "axios";
 import Invoice from "../Invoice/Invoice";
 import Bill from "../Bill/Bill";
 import Product from "../Product/Product";
+import Profile from "../Profile/Profile";
 
 function Dashboard() {
 	const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
@@ -32,9 +33,9 @@ function Dashboard() {
 					flexDirection: 'column',
 					justifyContent: 'space-between',
 					position: 'sticky',
-					top: 0, 
+					top: 0,
 					zIndex: 1,
-					overflowY: 'auto', 
+					overflowY: 'auto',
 				}}
 			>
 				<MenuList />
@@ -42,10 +43,13 @@ function Dashboard() {
 					<ProfileButton />
 				</Box>
 			</Box>
-			{/* <DashboardPage /> */}
-			<Invoice />
-			{/* <Bill /> */}
-			{/* <Product /> */}
+			<Routes>
+				<Route path="/" element={<DashboardPage />} />
+				<Route path="invoice" element={<Invoice />} />
+				<Route path="bill" element={<Bill />} />
+				<Route path="product" element={<Product />} />
+				<Route path="profile" element={<Profile />} />
+			</Routes>
 		</Stack>
 	);
 }

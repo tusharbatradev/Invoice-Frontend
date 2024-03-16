@@ -1,87 +1,233 @@
-import * as React from 'react';
-import { Box, Typography } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { ProductIcon, TransactionIcon } from '../assets/CustomIcons/Icons';
+import { useEffect, useState } from 'react';
+import { Box, Button, IconButton, Snackbar, Typography } from '@mui/material';
+import { CrossCancelIcon, EditedIcon, ProductIcon, SaveIcon } from '../assets/CustomIcons/Icons';
 import { Stack } from '@mui/system';
-
-const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-        field: 'ProductName',
-        headerName: 'Product name',
-        width: 150,
-    },
-    {
-        field: 'itemCode',
-        headerName: 'Item Code',
-        width: 150,
-    },
-    {
-        field: 'StockQuantity',
-        headerName: 'Stock Quantity',
-        width: 150,
-    },
-    {
-        field: 'sellingPrice',
-        headerName: 'Selling Price',
-        width: 150,
-    },
-    {
-        field: 'purchasePrice',
-        headerName: 'Purchase Price',
-        width: 150,
-    },
-];
+import axios from 'axios';
+import { DeleteBasketIcon } from '../assets/CustomIcons/Icons';
+import {
+    GridRowModes,
+    DataGrid,
+    GridToolbarContainer,
+    GridActionsCellItem,
+    GridRowEditStopReasons,
+} from '@mui/x-data-grid';
 
 
+export default function Table({ reload }) {
+    const columns = [
+        {
+            field: 'productName',
+            headerName: 'Product name',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'availability',
+            headerName: 'Status',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'actions',
+            type: 'actions',
+            headerName: 'Actions',
+            width: 100,
+            cellClassName: 'actions',
+            getActions: (params) => {
+                const { id } = params.row;
+                const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
-const rows = [
-    { id: 1, ProductName: 'Product 1', itemCode: '001', StockQuantity: 10, sellingPrice: '$50', purchasePrice: '$40', 'Date of Invoice': '2024-03-05', 'Total Amount': 100 },
-    { id: 2, ProductName: 'Product 2', itemCode: '002', StockQuantity: 20, sellingPrice: '$60', purchasePrice: '$45', 'Date of Invoice': '2024-03-06', 'Total Amount': 200 },
-    { id: 3, ProductName: 'Product 3', itemCode: '003', StockQuantity: 30, sellingPrice: '$70', purchasePrice: '$55', 'Date of Invoice': '2024-03-07', 'Total Amount': 300 },
-    { id: 4, ProductName: 'Product 4', itemCode: '004', StockQuantity: 40, sellingPrice: '$80', purchasePrice: '$65', 'Date of Invoice': '2024-03-08', 'Total Amount': 400 },
-    { id: 5, ProductName: 'Product 5', itemCode: '005', StockQuantity: 50, sellingPrice: '$90', purchasePrice: '$75', 'Date of Invoice': '2024-03-09', 'Total Amount': 500 },
-    { id: 6, ProductName: 'Product 6', itemCode: '006', StockQuantity: 60, sellingPrice: '$100', purchasePrice: '$85', 'Date of Invoice': '2024-03-10', 'Total Amount': 600 },
-    { id: 7, ProductName: 'Product 7', itemCode: '007', StockQuantity: 70, sellingPrice: '$110', purchasePrice: '$95', 'Date of Invoice': '2024-03-11', 'Total Amount': 700 },
-    { id: 8, ProductName: 'Product 8', itemCode: '008', StockQuantity: 80, sellingPrice: '$120', purchasePrice: '$105', 'Date of Invoice': '2024-03-12', 'Total Amount': 800 },
-    { id: 9, ProductName: 'Product 9', itemCode: '009', StockQuantity: 90, sellingPrice: '$130', purchasePrice: '$115', 'Date of Invoice': '2024-03-13', 'Total Amount': 900 },
-];
+                if (isInEditMode) {
+                    return [
+                        <GridActionsCellItem
+                            icon={<SaveIcon />}
+                            label="Save"
+                            sx={{
+                                color: 'primary.main',
+                            }}
+                            onClick={() => handleSaveClick(params)}
+                        />,
+                        <GridActionsCellItem
+                            icon={<CrossCancelIcon />}
+                            label="Cancel"
+                            className="textPrimary"
+                            onClick={() => handleCancelClick(params)}
+                            color="inherit"
+                        />,
+                    ];
+                }
+
+                return [
+                    <GridActionsCellItem
+                        icon={<EditedIcon />}
+                        label="Edit"
+                        className="textPrimary"
+                        onClick={() => handleEditClick(params)}
+                        color="inherit"
+                    />,
+                    <GridActionsCellItem
+                        icon={<DeleteBasketIcon />}
+                        label="Delete"
+                        onClick={() => handleDelete(params)}
+                        color="inherit"
+                    />,
+                ];
+            },
+        },
+    ];
+
+    const [rowModesModel, setRowModesModel] = useState({});
+    const [rows, setRows] = useState([]);
+    const [snackBar, setSnackBar] = useState(false);
+    const [snackBarMessage, setSnackBarMessage] = useState("");
+    const [snackBarColor, setSnackBarColor] = useState("");
+
+    // Edit click handler
+    const handleEditClick = (params) => {
+        const { id } = params.row;
+        setSnackBarMessage("Please Edit the Product")
+        setSnackBar(true)
+        setSnackBarColor("green")
+        setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+    };
+
+    // Save click handler
+    const handleSaveClick = async (params) => {
+        console.log("Save params", params.row._id);
+        try {
+            // Convert the "availability" field to a Boolean value
+            const availability = params.row.availability === "Available";
+
+            const updatedProduct = await axios.patch(
+                `http://localhost:3001/product/${params.row._id}`,
+                { ...params.row, availability:availability },
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                }
+            );
+            if (updatedProduct.status === 200) {
+                fetchProducts();
+                setSnackBarMessage("Product Updated");
+                setSnackBar(true);
+                setSnackBarColor("green");
+            }
+        } catch (error) {
+            console.error('Error updating document:', error);
+            setSnackBarMessage("Error updating product");
+            setSnackBar(true);
+            setSnackBarColor("red");
+        }
+        setRowModesModel({ ...rowModesModel, [params.row._id]: { mode: GridRowModes.View } })
+    }
 
 
+    // Cancel click handler
+    const handleCancelClick = (params) => {
+        const { id } = params.row;
+        setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+    };
+
+    // Delete function for the product
+    const handleDelete = async (params) => {
+        console.log("delet params", params)
+        try {
+            const deletedProduct = await axios.delete(`http://localhost:3001/product/${params.row._id}`, {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            }
+            );
+            if (deletedProduct.status === 200) {
+                fetchProducts()
+            }
+            setSnackBarMessage("Product Deleted")
+            setSnackBar(true)
+            setSnackBarColor("red")
+        } catch (error) {
+            console.error('Error deleting document:', error);
+        }
+    };
+
+    // Fetch products from API
+    async function fetchProducts() {
+        try {
+            const response = await axios.get("http://localhost:3001/product", {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            });
+            if (response.status === 200) {
+                let count = 0;
+                const rowData = response.data.map((item) => {
+                    count++;
+                    return {
+                        ...item,
+                        id: count,
+                        availability: item.availability ? "Available" : "Not Available",
+                    };
+                });
+                setRows(rowData);
+            }
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    // Fetch products on component mount and reload change
+    useEffect(() => {
+        fetchProducts();
+    }, [reload]);
 
 
-export default function Table() {
-    return (<>
-        <Stack paddingTop={2}>
-            <Typography sx={{
-                fontFamily: 'Poppins',
-                fontSize: 20,
-                fontWeight: 500,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-            }}
-            >
-                All Products <ProductIcon />
-            </Typography>
-            <Box sx={{ height: 400, padding: '8px' }}>
+    // Close SnackBar
+    const handleCloseSnackBar = () => {
+        setTimeout(() => {
+            setSnackBar(false);
+        }, 500);
+    };
+
+    return (
+        <Stack paddingX={2}>
+            <Box height={400} padding={2}>
                 <DataGrid
-                    sx={{ fontFamily: 'Poppins' }}
                     rows={rows}
                     columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
-                            },
-                        },
+                    editMode="row"
+                    rowModesModel={rowModesModel}
+                    onRowEditStop={(params, event) => {
+                        if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+                            event.defaultMuiPrevented = true;
+                        }
                     }}
-                    pageSizeOptions={[5]}
+                    pageSize={5}
                     checkboxSelection
                     disableRowSelectionOnClick
                 />
             </Box>
+            <Snackbar
+                ContentProps={{
+                    sx: {
+                        backgroundColor: snackBarColor
+                    }
+                }}
+                open={snackBar}
+                autoHideDuration={1000}
+                message={
+                    <Typography sx={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontFamily: 'Poppins'
+                    }}>
+                        {snackBarMessage}
+                    </Typography>
+                }
+                onClose={handleCloseSnackBar}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            />
         </Stack>
-    </>
     );
 }

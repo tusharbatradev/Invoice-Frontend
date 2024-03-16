@@ -13,11 +13,12 @@ import {
 	CloseEyeIcon,
 	OpenEyeIcon,
 	UserIcon,
-	SuccessIcon
+	SuccessIcon,
+	FailedIcon
 } from "../assets/CustomIcons/Icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Login } from "../redux/Slices/authSlice";
 
 function LoginPage() {
@@ -26,12 +27,14 @@ function LoginPage() {
 	const [loading, setLoading] = useState(true);
 	const [snackBar, setSnackBar] = useState(false);
 	const [snackBarMessage, setSnackBarMessage] = useState("");
+	const [snackBarColor, setSnackBarColor] = useState("")
 	const [credentials, setCredentials] = useState({
 		name: "",
 		username: "",
 		password: "",
 	});
-	const [token,setToken]=useState(null);
+	const [token, setToken] = useState(null);
+	const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
 	const dispatch = useDispatch();
 
 	// Login Functionality
@@ -63,8 +66,9 @@ function LoginPage() {
 			console.log(response);
 			if (response.status === 200) {
 				setSnackBarMessage(response.data.msg);
+				setSnackBarColor("green")
 				dispatch(Login());
-				localStorage.setItem('token',response?.data?.token);
+				localStorage.setItem('token', response?.data?.token);
 				console.log("Login Successfully");
 
 				setTimeout(() => {
@@ -73,6 +77,7 @@ function LoginPage() {
 			}
 		} catch (error) {
 			setSnackBarMessage("User Not Found");
+			setSnackBarColor("red");
 			console.warn(error);
 		}
 	};
@@ -235,7 +240,7 @@ function LoginPage() {
 			<Snackbar
 				ContentProps={{
 					sx: {
-						backgroundColor: 'green'
+						backgroundColor: snackBarColor
 					}
 				}}
 				open={snackBar}
@@ -248,11 +253,11 @@ function LoginPage() {
 						gap: '8px',
 						fontFamily: 'Poppins'
 					}}>
-						{snackBarMessage} <SuccessIcon />
+						{snackBarMessage} {snackBarColor === 'green' ? <SuccessIcon /> : <FailedIcon />}
 					</Typography>
-					}
-			onClose={handleCloseSnackBar}
-			anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+				}
+				onClose={handleCloseSnackBar}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
 		</Stack>
 	);

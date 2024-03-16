@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Divider, Stack } from "@mui/material";
 import ProductHeader from "./ProductHeader";
 import Table from "./ProductTable";
 
 function Product() {
+    const [reload,setReload]=useState(false);
     return (
         <Stack spacing={'8px'} sx={{
             backgroundColor: '#fff',
@@ -12,9 +13,9 @@ function Product() {
             borderRadius: '8px'
         }}>
 
-            <ProductHeader />
+            <ProductHeader setReload={setReload}/>
             <Divider />
-            <Table />
+            <Table reload={reload}/>
         </Stack>
     );
 }

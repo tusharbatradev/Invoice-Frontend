@@ -18,6 +18,10 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
+import CallIcon from '@mui/icons-material/Call';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 
 export const UserIcon = () => {
     return (<>
@@ -25,9 +29,39 @@ export const UserIcon = () => {
     </>)
 }
 
+export const SaveIcon = () => {
+    return (<>
+        <BookmarkAddIcon />
+    </>)
+}
+
+export const LogOutIcon = () => {
+    return (<>
+        <LogoutIcon />
+    </>)
+}
+
+export const ContactIcon = () => {
+    return (<>
+        <CallIcon />
+    </>)
+}
+
 export const CrossCancelIcon = () => {
     return (<>
         <CancelIcon sx={{color : '#df6161'}} />
+    </>)
+}
+
+export const DeleteBasketIcon = () => {
+    return (<>
+        <DeleteIcon sx={{color : '#df6161'}} />
+    </>)
+}
+
+export const FailedIcon = () => {
+    return (<>
+        <ThumbDownIcon />
     </>)
 }
 

@@ -73,16 +73,6 @@ function DashboardPage() {
             <Divider />
 
             <InvoiceData />
-
-            <Typography 
-            textAlign={'center'} 
-            fontFamily={'Poppins'}
-            fontSize={20}
-            fontWeight={500}
-            sx={{ marginTop: '70px' }}
-            >
-				Powered by Web Builders
-			</Typography>
         </Stack>)
 }
 

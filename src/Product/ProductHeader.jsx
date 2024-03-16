@@ -3,7 +3,7 @@ import { Stack, Typography, IconButton, Divider, TextField, Box, Button } from "
 import { BackIcon, StockLimit, ProductIcon, Search, CrossCancelIcon } from "../assets/CustomIcons/Icons";
 import AddProduct from "./AddProduct";
 
-function ProductHeader() {
+function ProductHeader({setReload}) {
     const [showAddProduct, setshowAddProduct] = useState(false)
 
     return (
@@ -11,7 +11,7 @@ function ProductHeader() {
             <Stack direction={'row'} justifyContent={'space-between'}>
                 <Typography sx={{
                     fontFamily: 'Poppins',
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: 500,
                     display: 'flex',
                     alignItems: 'center',
@@ -91,7 +91,7 @@ function ProductHeader() {
                 </Stack>
 
             </Stack>
-            {showAddProduct && <AddProduct setshowAddProduct={setshowAddProduct} />}
+            {showAddProduct && <AddProduct setReload={setReload} setshowAddProduct={setshowAddProduct} />}
         </Stack>
     );
 }

@@ -15,21 +15,21 @@ function MenuList() {
         setProductColor('#2b386a');
         setdashboardColor('');
         setInvoiceColor('');
-        // navigate('/products')
+        navigate('/dashboard/product')
     }
 
     const Invoice = () => {
         setInvoiceColor('#2b386a');
         setProductColor('');
         setdashboardColor('');
-        // navigate('/products')
+        navigate('/dashboard/invoice')
     }
 
     const Dashboard = () => {
         setInvoiceColor('');
         setProductColor('');
         setdashboardColor('#2b386a');
-        // navigate('/products')
+        navigate('/dashboard')
     }
 
 
@@ -107,7 +107,6 @@ function MenuList() {
                     <InvoiceIcon /> Invoice
                 </Typography>
             </Stack>
-
         </Box>
     )
 }
