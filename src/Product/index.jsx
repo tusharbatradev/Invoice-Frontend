@@ -42,7 +42,7 @@ export default function Product() {
         display={"flex"}
         direction={"row"}
         justifyContent={"space-between"}
-        padding={5}
+        padding={3}
       >
         <TextField
           InputProps={{
