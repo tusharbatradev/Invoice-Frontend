@@ -1,7 +1,9 @@
-import { Stack, Typography, Box } from "@mui/material"
+import { Stack, Typography, Box, Divider } from "@mui/material"
 import InvoiceDetails from "./InvoiceDetails"
 import BusinessDetails from "./BuisinessDetails"
-
+import CustomerDetails from "./CustomerDetails"
+import { dummyData } from "./dummyData"
+import InvoiceItemTable from "./InvoiceItemTable"
 
 function GeneratedBill() {
     return (
@@ -14,7 +16,7 @@ function GeneratedBill() {
             padding: '12px'
         }}>
             {/* A4 Size Stack */}
-            <Stack sx={{
+            <Stack spacing={8} sx={{
                 backgroundColor: '#fff',
                 width: '21cm',
                 height: '29.7cm',
@@ -23,8 +25,10 @@ function GeneratedBill() {
                 <Stack display={'flex'} direction={'row'} justifyContent={'space-between'}>
                     <BusinessDetails />
                     <InvoiceDetails />
+                    
                 </Stack>
-                
+                <CustomerDetails dummyData = {dummyData} />
+                <InvoiceItemTable dummyData = {dummyData} />
             </Stack>
         </Stack>
 

@@ -1,4 +1,5 @@
 import Dashboard from "./Dashboard/Dashboard";
+import LoginAnimation from "./LoginAnimation/LoginAnimation";
 import LoginPage from "./UserLogin/Login";
 import RegistrationPage from "./UserRegistration/Registration";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";

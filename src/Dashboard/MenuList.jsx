@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, Box, Typography } from "@mui/material"
 import { DashboardIcon, ProductIcon, InvoiceIcon } from "../assets/CustomIcons/Icons";
@@ -10,6 +10,7 @@ function MenuList() {
     const [InvoiceColor, setInvoiceColor] = useState('');
 
     const navigate = useNavigate();
+
     // Products function for navigation
     const Product = () => {
         setProductColor('#2b386a');
@@ -32,9 +33,8 @@ function MenuList() {
         navigate('/dashboard')
     }
 
-
     return (
-        <Box sx={{padding: "12px 12px 0px 12px",}}>
+        <Box sx={{ padding: "12px 12px 0px 12px", }}>
 
             {/* Profile Box */}
             <Stack display={'flex'} direction={'row'} spacing={'12px'}>

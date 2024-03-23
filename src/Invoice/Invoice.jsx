@@ -1,13 +1,22 @@
-import { Divider, IconButton, Stack, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
+import { Divider, IconButton, Stack, Typography, Skeleton } from "@mui/material"
 import { BackIcon } from "../assets/CustomIcons/Icons"
 import BusinessDetails from "./CustomerDetails"
 import InvoicePage from "./InvoicePage"
 import { useNavigate } from "react-router-dom"
 
-
 function Invoice() {
 
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 600);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (<>
         <Stack spacing={'8px'} sx={{
@@ -17,22 +26,23 @@ function Invoice() {
             borderRadius: '8px'
         }}>
             {/* Page Heading */}
-            <Typography sx={{
-                fontFamily: 'Poppins',
-                fontSize: 24,
-                fontWeight: 500,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-            }}>
-                <IconButton onClick={() => navigate('/dashboard')}>
-                    <BackIcon />
-                </IconButton>
-                Create Sales Invoice
-            </Typography>
-
+            {loading ?
+                <Skeleton sx={{ width: '300px', height: '45px' }} />
+                :
+                <Typography sx={{
+                    fontFamily: 'Poppins',
+                    fontSize: 24,
+                    fontWeight: 500,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    lineHeight: '45px'
+                }}>
+                    Create Sales Invoice
+                </Typography>
+            }
             <Divider />
-            
+
             <InvoicePage />
         </Stack>
     </>)
