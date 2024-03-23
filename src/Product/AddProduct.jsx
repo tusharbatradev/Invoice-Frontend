@@ -5,16 +5,20 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProductField } from "../redux/Slices/productSlice";
 
-function AddProduct({ setshowAddProduct,setReload }) {
+function AddProduct({ setshowAddProduct, setReload }) {
 
     const product = useSelector(state => state.product);
     const [snackBar, setSnackBar] = useState(false);
-    const [snackBarColor , setSnackBarColor] = useState('')
+    const [snackBarColor, setSnackBarColor] = useState('')
     const dispatch = useDispatch();
 
     const handleInputChange = (key, value) => {
+        if (key === 'availability') {
+            value = value === 'Available';
+        }
         dispatch(updateProductField({ key, value }));
     };
+
 
     const submit = async () => {
         setSnackBar(true);
@@ -94,7 +98,11 @@ function AddProduct({ setshowAddProduct,setReload }) {
                             <TextField
                                 placeholder="Availability"
                                 value={product.availability ? 'Available' : 'Not Available'}
-                                onChange={(e) => handleInputChange('availability', e.target.value === 'Available')}
+                                onChange={(e) => {
+                                    const newValue = e.target.value;
+                                    console.log("New Value:", newValue);
+                                    handleInputChange('availability', newValue === 'Not Available');
+                                }}
                                 sx={{
                                     "& .MuiInputBase-root": {
                                         height: "45px",

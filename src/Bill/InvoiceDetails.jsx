@@ -8,8 +8,9 @@ function InvoiceDetails() {
             </Typography>
             <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={16}>
                 Invoice Date :- 08-03-2024
-            </Typography>
+            </Typography>       
         </Stack>
+        
     </>)
 }
 

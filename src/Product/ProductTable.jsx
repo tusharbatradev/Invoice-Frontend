@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, IconButton, Snackbar, Typography } from '@mui/material';
+import { Box, Button, IconButton, Skeleton, Snackbar, Typography } from '@mui/material';
 import { CrossCancelIcon, EditedIcon, ProductIcon, SaveIcon } from '../assets/CustomIcons/Icons';
 import { Stack } from '@mui/system';
 import axios from 'axios';
@@ -100,7 +100,7 @@ export default function Table({ reload }) {
 
             const updatedProduct = await axios.patch(
                 `http://localhost:3001/product/${params.row._id}`,
-                { ...params.row, availability:availability },
+                { ...params.row, availability: availability },
                 {
                     headers: {
                         Authorization: localStorage.getItem("token")
@@ -112,6 +112,7 @@ export default function Table({ reload }) {
                 setSnackBarMessage("Product Updated");
                 setSnackBar(true);
                 setSnackBarColor("green");
+                console.log(updatedProduct)
             }
         } catch (error) {
             console.error('Error updating document:', error);
@@ -188,24 +189,39 @@ export default function Table({ reload }) {
         }, 500);
     };
 
+    // Loading State
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 600);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <Stack paddingX={2}>
-            <Box height={400} padding={2}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    editMode="row"
-                    rowModesModel={rowModesModel}
-                    onRowEditStop={(params, event) => {
-                        if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-                            event.defaultMuiPrevented = true;
-                        }
-                    }}
-                    pageSize={5}
-                    checkboxSelection
-                    disableRowSelectionOnClick
-                />
-            </Box>
+            {loading ?
+                <Skeleton sx={{ height: '450px' }} /> :
+                <Box height={400} padding={2}>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        editMode="row"
+                        rowModesModel={rowModesModel}
+                        onRowEditStop={(params, event) => {
+                            if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+                                event.defaultMuiPrevented = true;
+                            }
+                        }}
+                        pageSize={5}
+                        checkboxSelection
+                        disableRowSelectionOnClick
+                    />
+                </Box>
+            }
+
             <Snackbar
                 ContentProps={{
                     sx: {
