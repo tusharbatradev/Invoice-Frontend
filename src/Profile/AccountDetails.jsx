@@ -14,7 +14,7 @@ function AccountDetails() {
                     width: '350px',
                     height: '350px',
                     borderRadius: '50%',
-                    // backgroundImage: `url(${Logo})`,
+                    backgroundImage: `url(${Logo})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }} />

@@ -42,7 +42,7 @@ function MenuList() {
                 {/* Business Decription */}
                 <Stack justifyContent={'center'}>
                     <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={16} color={'#fff'}>
-                        Business Name
+                        Sangeeta Jewellers
                     </Typography>
                     <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={'0.8rem'} color={'#fff'}>
                         +91 9589540875

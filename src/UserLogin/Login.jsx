@@ -147,9 +147,7 @@ function LoginPage() {
 							}
 							InputProps={{
 								endAdornment: (
-									<IconButton>
-										<UserIcon />
-									</IconButton>
+									<UserIcon />
 								),
 							}}
 							sx={{
