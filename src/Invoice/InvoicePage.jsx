@@ -8,10 +8,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 function InvoicePage() {
-  const invoice = useSelector((state) => state.invoice.invoice);
   const products = useSelector((state) => state.invoice.products);
 
-  console.log("invoice slice data", invoice, products);
+  console.log("invoice slice data", products);
   const [formData, setFormData] = useState({
     customer: {
       firstName: "",
