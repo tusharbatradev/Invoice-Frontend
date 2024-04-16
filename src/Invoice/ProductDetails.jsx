@@ -8,151 +8,55 @@ import {
   Skeleton,
   Autocomplete,
 } from "@mui/material";
+import "./style.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { UseSelector, useDispatch } from "react-redux";
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-  {
-    label: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-  { label: "The Good, the Bad and the Ugly", year: 1966 },
-  { label: "Fight Club", year: 1999 },
-  {
-    label: "The Lord of the Rings: The Fellowship of the Ring",
-    year: 2001,
-  },
-  {
-    label: "Star Wars: Episode V - The Empire Strikes Back",
-    year: 1980,
-  },
-  { label: "Forrest Gump", year: 1994 },
-  { label: "Inception", year: 2010 },
-  {
-    label: "The Lord of the Rings: The Two Towers",
-    year: 2002,
-  },
-  { label: "One Flew Over the Cuckoo's Nest", year: 1975 },
-  { label: "Goodfellas", year: 1990 },
-  { label: "The Matrix", year: 1999 },
-  { label: "Seven Samurai", year: 1954 },
-  {
-    label: "Star Wars: Episode IV - A New Hope",
-    year: 1977,
-  },
-  { label: "City of God", year: 2002 },
-  { label: "Se7en", year: 1995 },
-  { label: "The Silence of the Lambs", year: 1991 },
-  { label: "It's a Wonderful Life", year: 1946 },
-  { label: "Life Is Beautiful", year: 1997 },
-  { label: "The Usual Suspects", year: 1995 },
-  { label: "Léon: The Professional", year: 1994 },
-  { label: "Spirited Away", year: 2001 },
-  { label: "Saving Private Ryan", year: 1998 },
-  { label: "Once Upon a Time in the West", year: 1968 },
-  { label: "American History X", year: 1998 },
-  { label: "Interstellar", year: 2014 },
-  { label: "Casablanca", year: 1942 },
-  { label: "City Lights", year: 1931 },
-  { label: "Psycho", year: 1960 },
-  { label: "The Green Mile", year: 1999 },
-  { label: "The Intouchables", year: 2011 },
-  { label: "Modern Times", year: 1936 },
-  { label: "Raiders of the Lost Ark", year: 1981 },
-  { label: "Rear Window", year: 1954 },
-  { label: "The Pianist", year: 2002 },
-  { label: "The Departed", year: 2006 },
-  { label: "Terminator 2: Judgment Day", year: 1991 },
-  { label: "Back to the Future", year: 1985 },
-  { label: "Whiplash", year: 2014 },
-  { label: "Gladiator", year: 2000 },
-  { label: "Memento", year: 2000 },
-  { label: "The Prestige", year: 2006 },
-  { label: "The Lion King", year: 1994 },
-  { label: "Apocalypse Now", year: 1979 },
-  { label: "Alien", year: 1979 },
-  { label: "Sunset Boulevard", year: 1950 },
-  {
-    label:
-      "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
-    year: 1964,
-  },
-  { label: "The Great Dictator", year: 1940 },
-  { label: "Cinema Paradiso", year: 1988 },
-  { label: "The Lives of Others", year: 2006 },
-  { label: "Grave of the Fireflies", year: 1988 },
-  { label: "Paths of Glory", year: 1957 },
-  { label: "Django Unchained", year: 2012 },
-  { label: "The Shining", year: 1980 },
-  { label: "WALL·E", year: 2008 },
-  { label: "American Beauty", year: 1999 },
-  { label: "The Dark Knight Rises", year: 2012 },
-  { label: "Princess Mononoke", year: 1997 },
-  { label: "Aliens", year: 1986 },
-  { label: "Oldboy", year: 2003 },
-  { label: "Once Upon a Time in America", year: 1984 },
-  { label: "Witness for the Prosecution", year: 1957 },
-  { label: "Das Boot", year: 1981 },
-  { label: "Citizen Kane", year: 1941 },
-  { label: "North by Northwest", year: 1959 },
-  { label: "Vertigo", year: 1958 },
-  {
-    label: "Star Wars: Episode VI - Return of the Jedi",
-    year: 1983,
-  },
-  { label: "Reservoir Dogs", year: 1992 },
-  { label: "Braveheart", year: 1995 },
-  { label: "M", year: 1931 },
-  { label: "Requiem for a Dream", year: 2000 },
-  { label: "Amélie", year: 2001 },
-  { label: "A Clockwork Orange", year: 1971 },
-  { label: "Like Stars on Earth", year: 2007 },
-  { label: "Taxi Driver", year: 1976 },
-  { label: "Lawrence of Arabia", year: 1962 },
-  { label: "Double Indemnity", year: 1944 },
-  {
-    label: "Eternal Sunshine of the Spotless Mind",
-    year: 2004,
-  },
-  { label: "Amadeus", year: 1984 },
-  { label: "To Kill a Mockingbird", year: 1962 },
-  { label: "Toy Story 3", year: 2010 },
-  { label: "Logan", year: 2017 },
-  { label: "Full Metal Jacket", year: 1987 },
-  { label: "Dangal", year: 2016 },
-  { label: "The Sting", year: 1973 },
-  { label: "2001: A Space Odyssey", year: 1968 },
-  { label: "Singin' in the Rain", year: 1952 },
-  { label: "Toy Story", year: 1995 },
-  { label: "Bicycle Thieves", year: 1948 },
-  { label: "The Kid", year: 1921 },
-  { label: "Inglourious Basterds", year: 2009 },
-  { label: "Snatch", year: 2000 },
-  { label: "3 Idiots", year: 2009 },
-  { label: "Monty Python and the Holy Grail", year: 1975 },
-];
-function ProductDetails({ formData, setFormData }) {
-  const handleChange = (index, fieldName, value) => {
-    const updatedProducts = [...formData.product];
-    updatedProducts[index] = {
-      ...updatedProducts[index],
-      [fieldName]: value,
-    };
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fillProductsField,
+  updateInvoiceField,
+} from "../redux/Slices/invoiceSlice";
 
-    setFormData({
-      ...formData,
-      product: updatedProducts,
-    });
-  };
+function ProductDetails({ id }) {
   const [availableProducts, setAvailableProducts] = useState([]);
+  const products = useSelector((state) => state.invoice.products);
+  const product = products?.find((product) => product.id === id);
+  const dispatch = useDispatch();
 
+  const handleUpdateField = (e) => {
+    const { name, value } = e.target;
+    let updatedAmount = product.productAmount; // Default to current amount
+
+    if (
+      name === "productWeight" ||
+      name === "productCost" ||
+      name === "makingCharges" ||
+      name === "productQuantity"
+    ) {
+      const parsedWeight =
+        parseFloat(name === "productWeight" ? value : product.productWeight) ||
+        0;
+      const parsedRate =
+        parseFloat(name === "productCost" ? value : product.productCost) || 0;
+      const parsedMakingCharges =
+        parseFloat(name === "makingCharges" ? value : product.makingCharges) ||
+        0;
+      const parsedQuantity =
+        parseInt(
+          name === "productQuantity" ? value : product.productQuantity
+        ) || 1; // Default to 1 if invalid quantity
+
+      const calculatedAmount =
+        parsedWeight * parsedRate + parsedWeight * parsedMakingCharges;
+      const totalAmount = isNaN(calculatedAmount)
+        ? 0
+        : calculatedAmount * parsedQuantity;
+      updatedAmount = totalAmount.toFixed(2);
+    }
+
+    dispatch(fillProductsField({ id, field: name, value }));
+    dispatch(fillProductsField({ id, field: "amount", value: updatedAmount }));
+  };
   async function fetchProducts() {
     try {
       const response = await axios.get("http://localhost:3001/product", {
@@ -191,40 +95,29 @@ function ProductDetails({ formData, setFormData }) {
 
   return (
     <Stack padding={"16px"} spacing={"4px"}>
-      {loading ? (
-        <Skeleton height={"185px"} />
-      ) : (
-        formData.product.map((product, index) => (
-          <Box
-            key={index}
-            sx={{
-              padding: "16px",
-              border: "1px solid #9fa8af",
-              borderRadius: "12px",
-              marginTop: "16px",
-            }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={availableProducts}
-                  sx={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField {...params} placeholder="product name" />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={6}>
+      <Box
+        sx={{
+          padding: "16px",
+          border: "1px solid #9fa8af",
+          borderRadius: "12px",
+          marginTop: "16px",
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={availableProducts}
+              className="productAutocomplete"
+              renderInput={(params) => (
                 <TextField
+                  {...params}
                   fullWidth
-                  variant="outlined"
-                  placeholder="Product Weight"
-                  value={product.productWeight}
-                  onChange={(e) =>
-                    handleChange(index, "productWeight", e.target.value)
-                  }
+                  placeholder="Product name"
+                  name="product"
+                  value={product.product}
+                  onChange={fillProductsField}
                   sx={{
                     "& .MuiInputBase-root": {
                       height: "40px",
@@ -235,89 +128,130 @@ function ProductDetails({ formData, setFormData }) {
                     },
                   }}
                 />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  placeholder="Product Cost"
-                  value={product.productCost}
-                  onChange={(e) =>
-                    handleChange(index, "productCost", e.target.value)
-                  }
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      height: "40px",
-                      borderRadius: "8px",
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#555555",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  placeholder="Making Charges"
-                  value={product.makingCharges}
-                  onChange={(e) =>
-                    handleChange(index, "makingCharges", e.target.value)
-                  }
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      height: "40px",
-                      borderRadius: "8px",
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#555555",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  placeholder="Product ID"
-                  value={product.id}
-                  onChange={(e) => handleChange(index, "id", e.target.value)}
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      height: "40px",
-                      borderRadius: "8px",
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#555555",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  placeholder="Product Quantity"
-                  value={product.productQuantity}
-                  onChange={(e) =>
-                    handleChange(index, "productQuantity", e.target.value)
-                  }
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      height: "40px",
-                      borderRadius: "8px",
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#555555",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-        ))
-      )}
+              )}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Product Weight"
+              name="productWeight"
+              type="number"
+              value={product.productWeight}
+              onChange={handleUpdateField}
+              sx={{
+                "& .MuiInputBase-root": {
+                  height: "40px",
+                  borderRadius: "8px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555555",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Product Cost"
+              name="productCost"
+              value={product.productCost}
+              type="number"
+              onChange={handleUpdateField}
+              sx={{
+                "& .MuiInputBase-root": {
+                  height: "40px",
+                  borderRadius: "8px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555555",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Making Charges"
+              name="makingCharges"
+              value={product.makingCharges}
+              type="number"
+              onChange={handleUpdateField}
+              sx={{
+                "& .MuiInputBase-root": {
+                  height: "40px",
+                  borderRadius: "8px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555555",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Product ID"
+              name="id"
+              value={product.id}
+              onChange={handleUpdateField}
+              sx={{
+                "& .MuiInputBase-root": {
+                  height: "40px",
+                  borderRadius: "8px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555555",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Product Quantity"
+              name="productQuantity"
+              value={product.productQuantity}
+              type="number"
+              onChange={handleUpdateField}
+              sx={{
+                "& .MuiInputBase-root": {
+                  height: "40px",
+                  borderRadius: "8px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555555",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              disabled
+              fullWidth
+              variant="outlined"
+              placeholder="Product amount"
+              name="productAmount"
+              value={product.productAmount}
+              sx={{
+                "& .MuiInputBase-root": {
+                  height: "40px",
+                  backgroundColor: "#D0D5D7",
+                  borderRadius: "8px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555555",
+                  },
+                },
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Box>
 
       {/* {loading ?
                 <Skeleton height={'35px'} width={'100%'} />

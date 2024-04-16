@@ -1,0 +1,9 @@
+.productName {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.productAutocomplete {
+  padding: 0.5px 4px 7.5px 5px;
+}

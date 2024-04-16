@@ -12,16 +12,20 @@ function InvoicePage() {
   const products = useSelector((state) => state.invoice.products);
   console.log("invoice products", products);
   const dispatch = useDispatch();
-  const handleAddNewProduct = () => {
+  const handleAddNewProduct = (e) => {
+    e.preventDefault();
+    const newId = Math.max(...products.map((product) => product.id), 0) + 1;
+    console.log(newId);
     dispatch(
       addProduct({
+        id: newId,
         product: "",
-        productWeight: "",
-        productCost: "",
-        productQuantity: "",
-        makingCharges: "",
+        productWeight: 0,
+        productCost: 0,
+        productQuantity: 1,
+        makingCharges: 0,
         productId: "",
-        productAmount: "",
+        productAmount: 0,
       })
     );
   };
@@ -76,12 +80,14 @@ function InvoicePage() {
   return (
     <Stack spacing={"-15px"}>
       <CustomerDetails formData={formData} setFormData={setFormData} />
-      <Typography lineHeight={"25px"} fontFamily={"Poppins"} fontWeight={500}>
-        Product Details{" "}
-        <span style={{ color: "red", alignSelf: "center" }}>*</span>
-      </Typography>
+      {products.length !== 0 && (
+        <Typography lineHeight={"25px"} fontFamily={"Poppins"} fontWeight={500}>
+          Product Details{" "}
+          <span style={{ color: "red", alignSelf: "center" }}>*</span>
+        </Typography>
+      )}
       {products.map((prod) => (
-        <ProductDetails formData={formData} setFormData={setFormData} />
+        <ProductDetails id={prod?.id} />
       ))}
       <Button
         onClick={handleAddNewProduct}
