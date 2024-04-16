@@ -20,6 +20,8 @@ import { removeProduct } from "../redux/Slices/invoiceSlice";
 
 function ProductDetails({ id }) {
   const [availableProducts, setAvailableProducts] = useState([]);
+  const [productValue, setProductValue] = useState("");
+  console.log("productValue", productValue);
   const products = useSelector((state) => state.invoice.products);
   const product = products?.find((product) => product.id === id);
   const dispatch = useDispatch();
@@ -57,6 +59,9 @@ function ProductDetails({ id }) {
 
     dispatch(fillProductsField({ id, field: name, value }));
     dispatch(fillProductsField({ id, field: "amount", value: updatedAmount }));
+  };
+  const handleSelectProductName = (value) => {
+    dispatch(fillProductsField({ id, field: "product", value }));
   };
   const handleRemoveProduct = () => {
     dispatch(removeProduct({ id: id }));
@@ -113,15 +118,17 @@ function ProductDetails({ id }) {
               disablePortal
               id="combo-box-demo"
               options={availableProducts}
+              value={product.product}
+              onChange={(e, newValue) => handleSelectProductName(newValue)}
               className="productAutocomplete"
               renderInput={(params) => (
                 <TextField
                   {...params}
                   fullWidth
                   placeholder="Product name"
-                  name="product"
-                  value={product.product}
-                  onChange={handleUpdateField}
+                  // name="product"
+                  // value={product.product}
+                  // onChange={handleUpdateField}
                   sx={{
                     "& .MuiInputBase-root": {
                       height: "40px",
