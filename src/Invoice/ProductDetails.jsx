@@ -121,7 +121,7 @@ function ProductDetails({ id }) {
                   placeholder="Product name"
                   name="product"
                   value={product.product}
-                  onChange={fillProductsField}
+                  onChange={handleUpdateField}
                   sx={{
                     "& .MuiInputBase-root": {
                       height: "40px",

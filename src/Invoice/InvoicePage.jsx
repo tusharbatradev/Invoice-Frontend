@@ -87,7 +87,7 @@ function InvoicePage() {
         </Typography>
       )}
       {products.map((prod) => (
-        <ProductDetails id={prod?.id} />
+        <ProductDetails key={prod?.id} id={prod?.id} />
       ))}
       <Button
         onClick={handleAddNewProduct}
