@@ -29,6 +29,8 @@ function ProductDetails({ id }) {
   const handleUpdateField = (e) => {
     const { name, value } = e.target;
     let updatedAmount = product.productAmount; // Default to current amount
+    console.log("product", product);
+    console.log("amount", product.productAmount);
 
     if (
       name === "productWeight" ||
@@ -58,7 +60,9 @@ function ProductDetails({ id }) {
     }
 
     dispatch(fillProductsField({ id, field: name, value }));
-    dispatch(fillProductsField({ id, field: "amount", value: updatedAmount }));
+    dispatch(
+      fillProductsField({ id, field: "productAmount", value: updatedAmount })
+    );
   };
   const handleSelectProductName = (value) => {
     dispatch(fillProductsField({ id, field: "product", value }));
