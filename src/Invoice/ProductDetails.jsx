@@ -16,6 +16,7 @@ import {
   fillProductsField,
   updateInvoiceField,
 } from "../redux/Slices/invoiceSlice";
+import { removeProduct } from "../redux/Slices/invoiceSlice";
 
 function ProductDetails({ id }) {
   const [availableProducts, setAvailableProducts] = useState([]);
@@ -56,6 +57,9 @@ function ProductDetails({ id }) {
 
     dispatch(fillProductsField({ id, field: name, value }));
     dispatch(fillProductsField({ id, field: "amount", value: updatedAmount }));
+  };
+  const handleRemoveProduct = () => {
+    dispatch(removeProduct({ id: id }));
   };
   async function fetchProducts() {
     try {
@@ -249,6 +253,11 @@ function ProductDetails({ id }) {
                 },
               }}
             />
+          </Grid>
+          <Grid item xs={6}>
+            <Button onClick={() => handleRemoveProduct(id)}>
+              Remove this item
+            </Button>
           </Grid>
         </Grid>
       </Box>
