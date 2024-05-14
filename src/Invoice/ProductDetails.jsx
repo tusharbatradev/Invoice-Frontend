@@ -17,6 +17,7 @@ import {
   updateInvoiceField,
 } from "../redux/Slices/invoiceSlice";
 import { removeProduct } from "../redux/Slices/invoiceSlice";
+import { CrossCancelIcon, DeleteBasketIcon, RemoveIcon } from "../assets/CustomIcons/Icons";
 
 function ProductDetails({ id }) {
   const [availableProducts, setAvailableProducts] = useState([]);
@@ -129,14 +130,15 @@ function ProductDetails({ id }) {
                 <TextField
                   {...params}
                   fullWidth
+                  variant="outlined"
                   placeholder="Product name"
                   // name="product"
                   // value={product.product}
                   // onChange={handleUpdateField}
                   sx={{
                     "& .MuiInputBase-root": {
-                      height: "40px",
                       borderRadius: "8px",
+                      height: "40px",
                       "&.Mui-focused fieldset": {
                         borderColor: "#555555",
                       },
@@ -265,33 +267,28 @@ function ProductDetails({ id }) {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
-            <Button onClick={() => handleRemoveProduct(id)}>
-              Remove this item
-            </Button>
-          </Grid>
         </Grid>
       </Box>
-
-      {/* {loading ?
-                <Skeleton height={'35px'} width={'100%'} />
-                :
-                <Button
-                    sx={{
-                        backgroundColor: '#0c1526',
-                        height : '35px',
-                        width: '100%',
-                        fontFamily: 'Poppins',
-                        marginTop: '16px',
-                        "&:hover": {
-                            backgroundColor: "#1d2659",
-                        },
-                    }}
-                    variant="contained"
-                >
-                    Add Product +
-                </Button>
-            } */}
+      <Grid item xs={6}>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => handleRemoveProduct(id)}
+          sx={{
+            bgcolor : '#e25454',
+            color : 'white',
+            fontFamily: "Poppins",
+            marginTop: "12px",
+            display : 'flex',
+            gap : '4px',
+            "&:hover": {
+              backgroundColor: "#e60023",
+            },
+          }}
+        >
+          Remove this item <RemoveIcon />
+        </Button>
+      </Grid>
     </Stack>
   );
 }

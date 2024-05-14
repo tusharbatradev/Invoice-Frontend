@@ -80,31 +80,40 @@ function InvoicePage() {
   return (
     <Stack spacing={"-15px"}>
       <CustomerDetails formData={formData} setFormData={setFormData} />
-      {products.length !== 0 && (
-        <Typography lineHeight={"25px"} fontFamily={"Poppins"} fontWeight={500}>
-          Product Details{" "}
-          <span style={{ color: "red", alignSelf: "center" }}>*</span>
-        </Typography>
-      )}
+      <Stack paddingX={"16px"} spacing={"4px"} paddingY={"4px"}>
+        {products.length !== 0 && (
+          <Typography
+            lineHeight={"25px"}
+            fontFamily={"Poppins"}
+            fontWeight={500}
+          >
+            Product Details{" "}
+            <span style={{ color: "red", alignSelf: "center" }}>*</span>
+          </Typography>
+        )}
+      </Stack>
       {products.map((prod) => (
         <ProductDetails key={prod?.id} id={prod?.id} />
       ))}
-      <Button
-        onClick={handleAddNewProduct}
-        sx={{
-          backgroundColor: "#0c1526",
-          height: "35px",
-          width: "100%",
-          fontFamily: "Poppins",
-          marginTop: "16px",
-          "&:hover": {
-            backgroundColor: "#1d2659",
-          },
-        }}
-        variant="contained"
-      >
-        Add products +
-      </Button>
+      <Stack paddingX={"16px"} spacing={"4px"} paddingY={"16px"}>
+        <Button
+          onClick={handleAddNewProduct}
+          sx={{
+            backgroundColor: "#0c1526",
+            height: "35px",
+            width: "100%",
+            fontFamily: "Poppins",
+            marginTop: "16px",
+            "&:hover": {
+              backgroundColor: "#1d2659",
+            },
+          }}
+          variant="contained"
+        >
+          Add products +
+        </Button>
+      </Stack>
+
       <OldProductDetails />
       <AmountDetails
         formData={formData}
