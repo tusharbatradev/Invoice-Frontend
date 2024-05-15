@@ -135,9 +135,10 @@ function ProductDetails({ id }) {
                   // name="product"
                   // value={product.product}
                   // onChange={handleUpdateField}
-                  sx={{
+                  sx={{	
                     "& .MuiInputBase-root": {
                       borderRadius: "8px",
+					  paddingY : '0px',
                       height: "40px",
                       "&.Mui-focused fieldset": {
                         borderColor: "#555555",
