@@ -73,7 +73,7 @@ function ProductDetails({ id }) {
   };
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:3001/product", {
+      const response = await axios.get("https://new-invoice-backend.onrender.com/product", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -138,7 +138,7 @@ function ProductDetails({ id }) {
                   sx={{	
                     "& .MuiInputBase-root": {
                       borderRadius: "8px",
-					  paddingY : '0px',
+					  padding : '0px',
                       height: "40px",
                       "&.Mui-focused fieldset": {
                         borderColor: "#555555",

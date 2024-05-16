@@ -37,7 +37,7 @@ function RegistrationPage() {
     const submit = async () => {
         setSnackBar(true);
         try {
-            const response = await axios.post("http://localhost:3001/user/signup", credentials);
+            const response = await axios.post("https://new-invoice-backend.onrender.com/user/signup", credentials);
             console.log(response);
             if (response.status === 200) {
                 setSnackBarMessage(response.data.msg);

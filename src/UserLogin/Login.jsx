@@ -60,7 +60,7 @@ function LoginPage() {
 		setSnackBar(true);
 		try {
 			const response = await axios.post(
-				"http://localhost:3001/user/login",
+				"https://new-invoice-backend.onrender.com/user/login",
 				credentials
 			);
 			console.log(response);

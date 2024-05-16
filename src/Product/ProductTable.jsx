@@ -110,7 +110,7 @@ export default function Table({ reload, setReload }) {
 			const availability = params.row.availability === "Available";
 
 			const updatedProduct = await axios.patch(
-				`http://localhost:3001/product/${params.row._id}`,
+				`https://new-invoice-backend.onrender.com/product/${params.row._id}`,
 				{ ...params.row, availability: availability },
 				{
 					headers: {
@@ -148,7 +148,7 @@ export default function Table({ reload, setReload }) {
 		console.log("delet params", params);
 		try {
 			const deletedProduct = await axios.delete(
-				`http://localhost:3001/product/${params.row._id}`,
+				`https://new-invoice-backend.onrender.com/product/${params.row._id}`,
 				{
 					headers: {
 						Authorization: localStorage.getItem("token"),
@@ -169,7 +169,7 @@ export default function Table({ reload, setReload }) {
 	// Fetch products from API
 	async function fetchProducts() {
 		try {
-			const response = await axios.get("http://localhost:3001/product", {
+			const response = await axios.get("https://new-invoice-backend.onrender.com/product", {
 				headers: {
 					Authorization: localStorage.getItem("token"),
 				},

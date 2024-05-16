@@ -37,7 +37,7 @@ function AddProduct({ setshowAddProduct, setReload }) {
 		setSnackBar(true);
 		try {
 			const response = await axios.post(
-				"http://localhost:3001/product",
+				"https://new-invoice-backend.onrender.com/product",
 				product,
 				{
 					headers: {

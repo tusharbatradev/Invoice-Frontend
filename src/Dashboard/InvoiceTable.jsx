@@ -44,7 +44,7 @@ export default function InvoiceData() {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get("http://localhost:3001/invoice/", {
+                const response = await axios.get("https://new-invoice-backend.onrender.com/invoice/", {
                     headers: {
                         Authorization: localStorage.getItem("token"),
                     },

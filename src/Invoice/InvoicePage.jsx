@@ -63,7 +63,7 @@ function InvoicePage() {
 
   const generateInvoice = () => {
     axios
-      .post("http://localhost:3001/invoice/", formData, {
+      .post("https://new-invoice-backend.onrender.com/invoice/", formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
