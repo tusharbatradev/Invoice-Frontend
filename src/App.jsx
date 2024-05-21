@@ -1,4 +1,5 @@
 import Dashboard from "./Dashboard/Dashboard";
+import LoginAnimation from "./LoginAnimation/LoginAnimation";
 import LoginPage from "./UserLogin/Login";
 import RegistrationPage from "./UserRegistration/Registration";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
@@ -11,7 +12,7 @@ function App() {
 				<Route path="/" element={<Navigate to="/SignUp" />} />
 				<Route path="/Login" element={<LoginPage />} />
 				<Route path="/SignUp" element={<RegistrationPage />} />
-				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/dashboard/*" element={<Dashboard />} />
 			</Routes>
 		</Router>
 	)

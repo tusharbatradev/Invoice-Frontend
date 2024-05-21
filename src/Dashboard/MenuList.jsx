@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, Box, Typography } from "@mui/material"
 import { DashboardIcon, ProductIcon, InvoiceIcon } from "../assets/CustomIcons/Icons";
@@ -10,31 +10,31 @@ function MenuList() {
     const [InvoiceColor, setInvoiceColor] = useState('');
 
     const navigate = useNavigate();
+
     // Products function for navigation
     const Product = () => {
         setProductColor('#2b386a');
         setdashboardColor('');
         setInvoiceColor('');
-        // navigate('/products')
+        navigate('/dashboard/product')
     }
 
     const Invoice = () => {
         setInvoiceColor('#2b386a');
         setProductColor('');
         setdashboardColor('');
-        // navigate('/products')
+        navigate('/dashboard/invoice')
     }
 
     const Dashboard = () => {
         setInvoiceColor('');
         setProductColor('');
         setdashboardColor('#2b386a');
-        // navigate('/products')
+        navigate('/dashboard')
     }
 
-
     return (
-        <Box sx={{padding: "12px 12px 0px 12px",}}>
+        <Box sx={{ padding: "12px 12px 0px 12px", }}>
 
             {/* Profile Box */}
             <Stack display={'flex'} direction={'row'} spacing={'12px'}>
@@ -42,7 +42,7 @@ function MenuList() {
                 {/* Business Decription */}
                 <Stack justifyContent={'center'}>
                     <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={16} color={'#fff'}>
-                        Business Name
+                        Sangeeta Jewellers
                     </Typography>
                     <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={'0.8rem'} color={'#fff'}>
                         +91 9589540875
@@ -107,7 +107,6 @@ function MenuList() {
                     <InvoiceIcon /> Invoice
                 </Typography>
             </Stack>
-
         </Box>
     )
 }
