@@ -57,7 +57,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
               justifyContent={"space-between"}
             >
               <Typography fontFamily={"Poppins"} fontWeight={500}>
-                Total Amount
+                Total amount
               </Typography>
               <TextField
                 value={grandTotal}
@@ -73,6 +73,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     },
                   },
                 }}
+                placeholder="Enter total amount"
               />
             </Stack>
             <Stack
@@ -97,6 +98,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     },
                   },
                 }}
+                placeholder="Enter GST"
               />
             </Stack>
             <Stack
@@ -121,6 +123,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     },
                   },
                 }}
+                placeholder="Enter discount"
               />
             </Stack>
             <Stack
@@ -129,7 +132,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
               justifyContent={"space-between"}
             >
               <Typography fontFamily={"Poppins"} fontWeight={500}>
-                Amount Paid
+                Amount paid
               </Typography>
               <TextField
                 value={amountPaid}
@@ -145,6 +148,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     },
                   },
                 }}
+                placeholder="Enter amount paid"
               />
             </Stack>
             <Stack
@@ -153,7 +157,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
               justifyContent={"space-between"}
             >
               <Typography fontFamily={"Poppins"} fontWeight={500}>
-                Remaining Balance
+                Remaining balance
               </Typography>
               <TextField
                 value={remainingBalance}
@@ -169,6 +173,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     },
                   },
                 }}
+                placeholder="Enter remaining balance"
               />
             </Stack>
           </Box>

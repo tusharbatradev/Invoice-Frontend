@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack, Button, Typography } from "@mui/material";
+import { Stack, Button, Typography, Divider } from "@mui/material";
 import CustomerDetails from "./CustomerDetails";
 import ProductDetails from "./ProductDetails";
 import OldProductDetails from "./OldProductDetails";
@@ -87,8 +87,7 @@ function InvoicePage() {
             fontFamily={"Poppins"}
             fontWeight={500}
           >
-            Product Details{" "}
-            <span style={{ color: "red", alignSelf: "center" }}>*</span>
+            Product Details
           </Typography>
         )}
       </Stack>
