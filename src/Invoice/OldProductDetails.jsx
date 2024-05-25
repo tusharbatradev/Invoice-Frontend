@@ -32,7 +32,7 @@ function OldProductDetails() {
         <Skeleton width={"140px"} height={"25px"} />
       ) : (
         <Typography lineHeight={"25px"} fontFamily={"Poppins"} fontWeight={500}>
-          Enter old product details :-
+          Enter old product details
         </Typography>
       )}
       {loading ? (
@@ -57,7 +57,7 @@ function OldProductDetails() {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter Old Silver Quantity
+                Old silver quantity
               </Typography>
               <TextField
                 fullWidth
@@ -72,6 +72,7 @@ function OldProductDetails() {
                     },
                   },
                 }}
+                placeholder="Enter old silver quantity"
               />
             </Grid>
             <Grid item xs={6}>
@@ -81,7 +82,7 @@ function OldProductDetails() {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter Old Silver Cost
+                Old silver cost
               </Typography>
               <TextField
                 fullWidth
@@ -96,6 +97,7 @@ function OldProductDetails() {
                     },
                   },
                 }}
+                placeholder={"Enter old silver cost"}
               />
             </Grid>
           </Grid>
@@ -108,7 +110,7 @@ function OldProductDetails() {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter Old Gold Quantity
+                Old gold quantity
               </Typography>
               <TextField
                 fullWidth
@@ -123,6 +125,7 @@ function OldProductDetails() {
                     },
                   },
                 }}
+                placeholder={"Enter old gold quantity"}
               />
             </Grid>
             <Grid item xs={6}>
@@ -132,7 +135,7 @@ function OldProductDetails() {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter Old Gold Cost
+                Old gold cost
               </Typography>
               <TextField
                 fullWidth
@@ -147,6 +150,7 @@ function OldProductDetails() {
                     },
                   },
                 }}
+                placeholder={"Enter old gold cost"}
               />
             </Grid>
           </Grid>

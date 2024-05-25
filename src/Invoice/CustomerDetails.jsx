@@ -48,7 +48,7 @@ function CustomerDetails({ formData, setFormData }) {
         <Skeleton width={"140px"} height={"25px"} />
       ) : (
         <Typography lineHeight={"25px"} fontFamily={"Poppins"} fontWeight={500}>
-          Customer Details :-
+          Customer Details
         </Typography>
       )}
 
@@ -70,7 +70,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter first name
+                First name
                 <span
                   style={{
                     color: "red",
@@ -85,6 +85,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fullWidth
                 variant="outlined"
                 value={firstName}
+                placeholder="Enter first name"
                 onChange={(e) => handleChange(e, "firstName")}
                 sx={{
                   "& .MuiInputBase-root": {
@@ -104,7 +105,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter last name
+                Last name
                 <span
                   style={{
                     color: "red",
@@ -119,6 +120,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fullWidth
                 variant="outlined"
                 value={lastName}
+                placeholder="Enter last name"
                 onChange={(e) => handleChange(e, "lastName")}
                 sx={{
                   "& .MuiInputBase-root": {
@@ -138,7 +140,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter contact number
+                Contact number
                 <span
                   style={{
                     color: "red",
@@ -153,6 +155,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fullWidth
                 variant="outlined"
                 value={contactNumber}
+                placeholder="Enter contact number"
                 onChange={(e) => handleChange(e, "contactNumber")}
                 sx={{
                   "& .MuiInputBase-root": {
@@ -172,7 +175,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter address
+                Address
                 <span
                   style={{
                     color: "red",
@@ -187,6 +190,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fullWidth
                 variant="outlined"
                 value={address}
+                placeholder="Enter address"
                 onChange={(e) => handleChange(e, "address")}
                 sx={{
                   "& .MuiInputBase-root": {
@@ -206,7 +210,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter city or village
+                City / Village
                 <span
                   style={{
                     color: "red",
@@ -221,6 +225,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fullWidth
                 variant="outlined"
                 value={cityOrVillage}
+                placeholder="Enter city / village"
                 onChange={(e) => handleChange(e, "cityOrVillage")}
                 sx={{
                   "& .MuiInputBase-root": {
@@ -240,7 +245,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Enter pincode
+                Pincode
                 <span
                   style={{
                     color: "red",
@@ -255,6 +260,7 @@ function CustomerDetails({ formData, setFormData }) {
                 fullWidth
                 variant="outlined"
                 value={pincode}
+                placeholder="Enter pincode"
                 onChange={(e) => handleChange(e, "pincode")}
                 sx={{
                   "& .MuiInputBase-root": {

@@ -141,7 +141,7 @@ function ProductDetails({ id }) {
                     fontWeight={500}
                     color={"#0c1526"}
                   >
-                    Enter Product name
+                    Product name
                     <span
                       style={{
                         color: "red",
@@ -159,6 +159,7 @@ function ProductDetails({ id }) {
                     // name="product"
                     // value={product.product}
                     // onChange={handleUpdateField}
+                    placeholder="Enter product name"
                     sx={{
                       "& .MuiInputBase-root": {
                         borderRadius: "8px",
@@ -181,7 +182,7 @@ function ProductDetails({ id }) {
               fontWeight={500}
               color={"#0c1526"}
             >
-              Enter Product weight
+              Product weight
               <span
                 style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
               >
@@ -194,6 +195,7 @@ function ProductDetails({ id }) {
               name="productWeight"
               type="number"
               value={product.productWeight}
+              placeholder="Enter product weight"
               onChange={handleUpdateField}
               sx={{
                 "& .MuiInputBase-root": {
@@ -213,7 +215,7 @@ function ProductDetails({ id }) {
               fontWeight={500}
               color={"#0c1526"}
             >
-              Enter Product Cost
+              Product Cost
               <span
                 style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
               >
@@ -225,6 +227,7 @@ function ProductDetails({ id }) {
               variant="outlined"
               name="productCost"
               value={product.productCost}
+              placeholder="Enter product Cost"
               type="number"
               onChange={handleUpdateField}
               sx={{
@@ -245,7 +248,7 @@ function ProductDetails({ id }) {
               fontWeight={500}
               color={"#0c1526"}
             >
-              Enter Making Charges
+              Making Charges
               <span
                 style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
               >
@@ -257,6 +260,7 @@ function ProductDetails({ id }) {
               variant="outlined"
               name="makingCharges"
               value={product.makingCharges}
+              placeholder={"Enter making charges"}
               type="number"
               onChange={handleUpdateField}
               sx={{
@@ -277,13 +281,14 @@ function ProductDetails({ id }) {
               fontWeight={500}
               color={"#0c1526"}
             >
-              Enter Product Id
+              Product ID
             </Typography>
             <TextField
               fullWidth
               variant="outlined"
               name="id"
               value={product.id}
+              placeholder="Enter product ID"
               onChange={handleUpdateField}
               sx={{
                 "& .MuiInputBase-root": {
@@ -303,7 +308,7 @@ function ProductDetails({ id }) {
               fontWeight={500}
               color={"#0c1526"}
             >
-              Enter Product Quantity
+              Product quantity
               <span
                 style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
               >
@@ -315,6 +320,7 @@ function ProductDetails({ id }) {
               variant="outlined"
               name="productQuantity"
               value={product.productQuantity}
+              placeholder="Enter product quantity"
               type="number"
               onChange={handleUpdateField}
               sx={{
@@ -335,7 +341,7 @@ function ProductDetails({ id }) {
               fontWeight={500}
               color={"#0c1526"}
             >
-              Product Amount :-
+              Product Amount
             </Typography>
             <TextField
               disabled

@@ -87,7 +87,7 @@ function InvoicePage() {
             fontFamily={"Poppins"}
             fontWeight={500}
           >
-            Product Details :-
+            Product Details
           </Typography>
         )}
       </Stack>
