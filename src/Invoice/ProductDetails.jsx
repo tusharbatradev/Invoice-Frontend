@@ -17,7 +17,11 @@ import {
   updateInvoiceField,
 } from "../redux/Slices/invoiceSlice";
 import { removeProduct } from "../redux/Slices/invoiceSlice";
-import { CrossCancelIcon, DeleteBasketIcon, RemoveIcon } from "../assets/CustomIcons/Icons";
+import {
+  CrossCancelIcon,
+  DeleteBasketIcon,
+  RemoveIcon,
+} from "../assets/CustomIcons/Icons";
 
 function ProductDetails({ id }) {
   const [availableProducts, setAvailableProducts] = useState([]);
@@ -73,11 +77,14 @@ function ProductDetails({ id }) {
   };
   async function fetchProducts() {
     try {
-      const response = await axios.get("https://new-invoice-backend.onrender.com/product", {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      const response = await axios.get(
+        "https://new-invoice-backend.onrender.com/product",
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
       if (response.status === 200) {
         const availableProducts = response?.data
           ?.filter((product) => product?.availability === true)
@@ -127,33 +134,63 @@ function ProductDetails({ id }) {
               onChange={(e, newValue) => handleSelectProductName(newValue)}
               className="productAutocomplete"
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  variant="outlined"
-                  placeholder="Product name"
-                  // name="product"
-                  // value={product.product}
-                  // onChange={handleUpdateField}
-                  sx={{	
-                    "& .MuiInputBase-root": {
-                      borderRadius: "8px",
-					  padding : '0px',
-                      height: "40px",
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#555555",
+                <>
+                  <Typography
+                    fontFamily={"Poppins"}
+                    fontSize={"16px"}
+                    fontWeight={500}
+                    color={"#0c1526"}
+                  >
+                    Enter Product name
+                    <span
+                      style={{
+                        color: "red",
+                        alignSelf: "center",
+                        marginLeft: "2px",
+                      }}
+                    >
+                      *
+                    </span>
+                  </Typography>
+                  <TextField
+                    {...params}
+                    fullWidth
+                    variant="outlined"
+                    // name="product"
+                    // value={product.product}
+                    // onChange={handleUpdateField}
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        borderRadius: "8px",
+                        padding: "0px",
+                        height: "40px",
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#555555",
+                        },
                       },
-                    },
-                  }}
-                />
+                    }}
+                  />
+                </>
               )}
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography
+              fontFamily={"Poppins"}
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"#0c1526"}
+            >
+              Enter Product weight
+              <span
+                style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
+              >
+                *
+              </span>
+            </Typography>
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Product Weight"
               name="productWeight"
               type="number"
               value={product.productWeight}
@@ -170,10 +207,22 @@ function ProductDetails({ id }) {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography
+              fontFamily={"Poppins"}
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"#0c1526"}
+            >
+              Enter Product Cost
+              <span
+                style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
+              >
+                *
+              </span>
+            </Typography>
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Product Cost"
               name="productCost"
               value={product.productCost}
               type="number"
@@ -190,10 +239,22 @@ function ProductDetails({ id }) {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography
+              fontFamily={"Poppins"}
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"#0c1526"}
+            >
+              Enter Making Charges
+              <span
+                style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
+              >
+                *
+              </span>
+            </Typography>
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Making Charges"
               name="makingCharges"
               value={product.makingCharges}
               type="number"
@@ -210,10 +271,17 @@ function ProductDetails({ id }) {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography
+              fontFamily={"Poppins"}
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"#0c1526"}
+            >
+              Enter Product Id
+            </Typography>
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Product ID"
               name="id"
               value={product.id}
               onChange={handleUpdateField}
@@ -229,10 +297,22 @@ function ProductDetails({ id }) {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography
+              fontFamily={"Poppins"}
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"#0c1526"}
+            >
+              Enter Product Quantity
+              <span
+                style={{ color: "red", alignSelf: "center", marginLeft: "2px" }}
+              >
+                *
+              </span>
+            </Typography>
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Product Quantity"
               name="productQuantity"
               value={product.productQuantity}
               type="number"
@@ -249,6 +329,14 @@ function ProductDetails({ id }) {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography
+              fontFamily={"Poppins"}
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"#0c1526"}
+            >
+              Product Amount :-
+            </Typography>
             <TextField
               disabled
               fullWidth
@@ -276,12 +364,12 @@ function ProductDetails({ id }) {
           fullWidth
           onClick={() => handleRemoveProduct(id)}
           sx={{
-            bgcolor : '#e25454',
-            color : 'white',
+            bgcolor: "#e25454",
+            color: "white",
             fontFamily: "Poppins",
             marginTop: "12px",
-            display : 'flex',
-            gap : '4px',
+            display: "flex",
+            gap: "4px",
             "&:hover": {
               backgroundColor: "#e60023",
             },

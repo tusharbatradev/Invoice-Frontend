@@ -48,8 +48,7 @@ function CustomerDetails({ formData, setFormData }) {
         <Skeleton width={"140px"} height={"25px"} />
       ) : (
         <Typography lineHeight={"25px"} fontFamily={"Poppins"} fontWeight={500}>
-          Customer Details{" "}
-          <span style={{ color: "red", alignSelf: "center" }}>*</span>
+          Customer Details :-
         </Typography>
       )}
 
@@ -65,10 +64,26 @@ function CustomerDetails({ formData, setFormData }) {
         >
           <Grid container spacing={2}>
             <Grid item xs={6}>
+              <Typography
+                fontFamily={"Poppins"}
+                fontSize={"16px"}
+                fontWeight={500}
+                color={"#0c1526"}
+              >
+                Enter first name
+                <span
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "2px",
+                  }}
+                >
+                  *
+                </span>
+              </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Enter first name"
                 value={firstName}
                 onChange={(e) => handleChange(e, "firstName")}
                 sx={{
@@ -83,10 +98,26 @@ function CustomerDetails({ formData, setFormData }) {
               />
             </Grid>
             <Grid item xs={6}>
+              <Typography
+                fontFamily={"Poppins"}
+                fontSize={"16px"}
+                fontWeight={500}
+                color={"#0c1526"}
+              >
+                Enter last name
+                <span
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "2px",
+                  }}
+                >
+                  *
+                </span>
+              </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Enter last name"
                 value={lastName}
                 onChange={(e) => handleChange(e, "lastName")}
                 sx={{
@@ -101,10 +132,26 @@ function CustomerDetails({ formData, setFormData }) {
               />
             </Grid>
             <Grid item xs={6}>
+              <Typography
+                fontFamily={"Poppins"}
+                fontSize={"16px"}
+                fontWeight={500}
+                color={"#0c1526"}
+              >
+                Enter contact number
+                <span
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "2px",
+                  }}
+                >
+                  *
+                </span>
+              </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Enter contact number"
                 value={contactNumber}
                 onChange={(e) => handleChange(e, "contactNumber")}
                 sx={{
@@ -119,10 +166,26 @@ function CustomerDetails({ formData, setFormData }) {
               />
             </Grid>
             <Grid item xs={6}>
+              <Typography
+                fontFamily={"Poppins"}
+                fontSize={"16px"}
+                fontWeight={500}
+                color={"#0c1526"}
+              >
+                Enter address
+                <span
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "2px",
+                  }}
+                >
+                  *
+                </span>
+              </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Enter address"
                 value={address}
                 onChange={(e) => handleChange(e, "address")}
                 sx={{
@@ -137,10 +200,26 @@ function CustomerDetails({ formData, setFormData }) {
               />
             </Grid>
             <Grid item xs={6}>
+              <Typography
+                fontFamily={"Poppins"}
+                fontSize={"16px"}
+                fontWeight={500}
+                color={"#0c1526"}
+              >
+                Enter city or village
+                <span
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "2px",
+                  }}
+                >
+                  *
+                </span>
+              </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Enter city or village"
                 value={cityOrVillage}
                 onChange={(e) => handleChange(e, "cityOrVillage")}
                 sx={{
@@ -155,10 +234,26 @@ function CustomerDetails({ formData, setFormData }) {
               />
             </Grid>
             <Grid item xs={6}>
+              <Typography
+                fontFamily={"Poppins"}
+                fontSize={"16px"}
+                fontWeight={500}
+                color={"#0c1526"}
+              >
+                Enter pincode
+                <span
+                  style={{
+                    color: "red",
+                    alignSelf: "center",
+                    marginLeft: "2px",
+                  }}
+                >
+                  *
+                </span>
+              </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Enter pincode"
                 value={pincode}
                 onChange={(e) => handleChange(e, "pincode")}
                 sx={{
