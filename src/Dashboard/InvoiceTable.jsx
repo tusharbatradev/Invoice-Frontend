@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Chip, Stack, TextField, Typography } from "@mui/material";
+import { Box, Chip, Skeleton, Stack, TextField, Typography } from "@mui/material";
 import { Search, TransactionIcon } from "../assets/CustomIcons/Icons";
 import axios from "axios";
 import InvoiceCard from "./InvoiceCard";
@@ -64,13 +64,13 @@ export default function InvoiceData() {
                 customerAddress: invoiceData.customer.customerAddress,
                 customerCity: invoiceData.customer.customerCity,
                 customerPincode: invoiceData.customer.customerPincode,
-                invoiceDate: invoiceData.invoice.date, // Change 'date' to the actual field name
+                invoiceDate: invoiceData.invoice.date,
                 grandTotal: invoiceData.invoice.grandTotal,
                 gst: invoiceData.invoice.gst,
                 discount: invoiceData.invoice.discount,
                 amountPaid: invoiceData.invoice.amountPaid,
                 remainingBalance: invoiceData.invoice.remainingBalance,
-                invoiceNumber: invoiceData.invoice.invoiceNumber, // Assuming 'invoiceNumber' is the field name
+                invoiceNumber: invoiceData.invoice.invoiceNumber,
               };
             }
           );
@@ -138,15 +138,17 @@ export default function InvoiceData() {
         />
       </Stack>
 
-      <Stack sx={{
-        display : 'flex',
-        flexDirection : 'row',
-        flexWrap : 'wrap',
-        backgroundColor : '#0c1526',
-        padding : '16px',
-        justifyContent : 'space-between',
-        borderRadius : '16px'
-      }}>   
+      <Stack
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          backgroundColor: "#0c1526",
+          padding: "16px",
+          justifyContent: "space-between",
+          borderRadius: "16px",
+        }}
+      >
         {rows.map((row) => (
           <InvoiceCard
             key={row.id}
@@ -154,7 +156,7 @@ export default function InvoiceData() {
             invoiceNumber={row.invoiceNumber}
             customerFirstName={row.customerFirstName}
             customerLastName={row.customerLastName}
-            customerAddress={row.customerAddress}
+            customerCity={row.customerCity}
           />
         ))}
       </Stack>

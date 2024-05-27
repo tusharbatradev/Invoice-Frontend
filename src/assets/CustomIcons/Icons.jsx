@@ -23,6 +23,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export const UserIcon = () => {
   return (
@@ -228,6 +229,14 @@ export const RemoveIcon = () => {
   return (
     <>
       <RemoveCircleIcon />
+    </>
+  );
+};
+
+export const ForwardIcon = () => {
+  return (
+    <>
+      <ArrowForwardIosIcon sx={{width : '12px'}} />
     </>
   );
 };
