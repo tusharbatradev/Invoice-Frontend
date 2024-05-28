@@ -163,6 +163,7 @@ function AmountDetails({ generateInvoice }) {
                     },
                   },
                 }}
+                placeholder="Enter amount paid"
               />
             </Stack>
             <Stack
