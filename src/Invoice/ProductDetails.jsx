@@ -127,12 +127,12 @@ function ProductDetails({ id }) {
       }, 0);
       console.log("Sum", sum);
       total = isNaN(sum) ? invoice.total : parseFloat(sum);
-      let grandTotal = 0;
-      if (invoice.gst) {
+      let grandTotal = total;
+      if (invoice.gst !== "" || invoice.gst === 0) {
         const gst = (parseFloat(invoice.gst) / 100) * total;
         grandTotal = total + gst;
       }
-      if (invoice.discount) {
+      if (invoice.discount !== "" || invoice.discount === 0) {
         grandTotal = grandTotal - parseFloat(invoice.discount);
       }
 

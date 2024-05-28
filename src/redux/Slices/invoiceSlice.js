@@ -11,12 +11,12 @@ const initialState = {
   },
   products: [],
   invoice: {
-    grandTotal: 100,
-    total: 200,
-    gst: 3,
-    amountPaid: 100,
-    discount: 10,
-    remainingBalance: 10,
+    grandTotal: 0,
+    total: 0,
+    gst: 0,
+    amountPaid: 0,
+    discount: 0,
+    remainingBalance: 0,
   },
 };
 
