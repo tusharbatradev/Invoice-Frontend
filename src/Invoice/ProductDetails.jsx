@@ -114,7 +114,7 @@ function ProductDetails({ id }) {
 
     return () => clearTimeout(timer);
   }, []);
-  //Calculating Total
+  //Calculating Total, grandtotal
   useEffect(() => {
     const handleTotal = () => {
       let sum = 0,

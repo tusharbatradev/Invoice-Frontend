@@ -35,6 +35,16 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (amountPaid)
+      dispatch(
+        updateInvoiceField({
+          key: "remainingBalance",
+          value: grandTotal - amountPaid,
+        })
+      );
+  }, [amountPaid, grandTotal, remainingBalance]);
+
   return (
     <>
       {/* Total Amount Details */}
