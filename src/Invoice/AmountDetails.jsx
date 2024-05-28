@@ -189,12 +189,14 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                 Remaining balance
               </Typography>
               <TextField
+                disabled
                 value={remainingBalance}
                 onChange={(e) => handleChange(e, "remainingBalance")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "30px",
                     borderRadius: "8px",
+                    backgroundColor: "#D0D5D7",
                     fontFamily: "Poppins",
                     fontWeight: 600,
                     "&.Mui-focused fieldset": {
@@ -202,7 +204,6 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                     },
                   },
                 }}
-                placeholder="Enter remaining balance"
               />
             </Stack>
           </Box>

@@ -117,22 +117,36 @@ function ProductDetails({ id }) {
   //Calculating Total
   useEffect(() => {
     const handleTotal = () => {
-      const sum = products.reduce((acc, curr) => {
+      let sum = 0,
+        total = 0;
+      console.log("products", products);
+
+      sum = products.reduce((acc, curr) => {
         if (curr.productAmount !== 0)
           return acc + parseFloat(curr.productAmount);
       }, 0);
       console.log("Sum", sum);
-      var total = isNaN(sum) ? invoice.total : parseFloat(sum);
-
-      // if (invoice.gst) {
-      //   const gst = 0.03 * total;
-      //   total += gst;
-      // }
+      total = isNaN(sum) ? invoice.total : parseFloat(sum);
+      let grandTotal = 0;
+      if (invoice.gst) {
+        const gst = (parseFloat(invoice.gst) / 100) * total;
+        grandTotal = total + gst;
+      }
+      if (invoice.discount) {
+        grandTotal = grandTotal - parseFloat(invoice.discount);
+      }
 
       dispatch(updateInvoiceField({ key: "total", value: total }));
+      dispatch(updateInvoiceField({ key: "grandTotal", value: grandTotal }));
     };
     handleTotal();
-  }, [products, dispatch]);
+  }, [products, dispatch, invoice.gst, invoice.discount]);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(updateInvoiceField({ key: "total", value: 0 }));
+    }
+  }, []);
 
   return (
     <Stack padding={"16px"} spacing={"4px"}>
