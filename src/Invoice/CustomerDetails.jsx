@@ -9,16 +9,16 @@ import {
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCustomerField } from "../redux/Slices/invoiceSlice";
-function CustomerDetails({ formData, setFormData }) {
+function CustomerDetails() {
   const dispatch = useDispatch();
   const customer = useSelector((state) => state.invoice.customer);
   const {
-    firstName,
-    lastName,
-    contactNumber,
-    address,
-    cityOrVillage,
-    pincode,
+    customerFirstName,
+    customerLastName,
+    customerContact,
+    customerAddress,
+    customerCity,
+    customerPincode,
   } = customer;
   const handleChange = (e, fieldName) => {
     const { value } = e.target;
@@ -84,9 +84,9 @@ function CustomerDetails({ formData, setFormData }) {
               <TextField
                 fullWidth
                 variant="outlined"
-                value={firstName}
+                value={customerFirstName}
                 placeholder="Enter first name"
-                onChange={(e) => handleChange(e, "firstName")}
+                onChange={(e) => handleChange(e, "customerFirstName")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -119,9 +119,9 @@ function CustomerDetails({ formData, setFormData }) {
               <TextField
                 fullWidth
                 variant="outlined"
-                value={lastName}
+                value={customerLastName}
                 placeholder="Enter last name"
-                onChange={(e) => handleChange(e, "lastName")}
+                onChange={(e) => handleChange(e, "customerLastName")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -154,9 +154,9 @@ function CustomerDetails({ formData, setFormData }) {
               <TextField
                 fullWidth
                 variant="outlined"
-                value={contactNumber}
+                value={customerContact}
                 placeholder="Enter contact number"
-                onChange={(e) => handleChange(e, "contactNumber")}
+                onChange={(e) => handleChange(e, "customerContact")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -189,9 +189,9 @@ function CustomerDetails({ formData, setFormData }) {
               <TextField
                 fullWidth
                 variant="outlined"
-                value={address}
+                value={customerAddress}
                 placeholder="Enter address"
-                onChange={(e) => handleChange(e, "address")}
+                onChange={(e) => handleChange(e, "customerAddress")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -224,9 +224,9 @@ function CustomerDetails({ formData, setFormData }) {
               <TextField
                 fullWidth
                 variant="outlined"
-                value={cityOrVillage}
+                value={customerCity}
                 placeholder="Enter city / village"
-                onChange={(e) => handleChange(e, "cityOrVillage")}
+                onChange={(e) => handleChange(e, "customerCity")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -259,9 +259,9 @@ function CustomerDetails({ formData, setFormData }) {
               <TextField
                 fullWidth
                 variant="outlined"
-                value={pincode}
+                value={customerPincode}
                 placeholder="Enter pincode"
-                onChange={(e) => handleChange(e, "pincode")}
+                onChange={(e) => handleChange(e, "customerPincode")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",

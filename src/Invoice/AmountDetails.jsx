@@ -10,7 +10,7 @@ import { InvoiceIcon } from "../assets/CustomIcons/Icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateInvoiceField } from "../redux/Slices/invoiceSlice";
-function AmountDetails({ formData, setFormData, generateInvoice }) {
+function AmountDetails({ generateInvoice }) {
   const dispatch = useDispatch();
   const invoice = useSelector((state) => state.invoice.invoice);
   const { grandTotal, total, gst, amountPaid, discount, remainingBalance } =

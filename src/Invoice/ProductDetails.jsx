@@ -71,7 +71,8 @@ function ProductDetails({ id }) {
     );
   };
   const handleSelectProductName = (value) => {
-    dispatch(fillProductsField({ id, field: "product", value }));
+    console.log("value", value);
+    dispatch(fillProductsField({ id, field: "product", value: value?.label }));
   };
   const handleRemoveProduct = () => {
     dispatch(removeProduct({ id: id }));
@@ -143,10 +144,12 @@ function ProductDetails({ id }) {
   }, [products, dispatch, invoice.gst, invoice.discount]);
 
   useEffect(() => {
+    console.log("Aagay andar");
     if (products.length === 0) {
       dispatch(updateInvoiceField({ key: "total", value: 0 }));
+      dispatch(updateInvoiceField({ key: "grandTotal", value: 0 }));
     }
-  }, []);
+  }, [products.length, dispatch]);
 
   return (
     <Stack padding={"16px"} spacing={"4px"}>
