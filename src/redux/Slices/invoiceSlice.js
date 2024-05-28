@@ -12,6 +12,7 @@ const initialState = {
   products: [],
   invoice: {
     grandTotal: 100,
+    total: 200,
     gst: 20,
     amountPaid: 100,
     discount: 10,

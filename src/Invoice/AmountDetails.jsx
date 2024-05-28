@@ -13,7 +13,8 @@ import { updateInvoiceField } from "../redux/Slices/invoiceSlice";
 function AmountDetails({ formData, setFormData, generateInvoice }) {
   const dispatch = useDispatch();
   const invoice = useSelector((state) => state.invoice.invoice);
-  const { grandTotal, gst, amountPaid, discount, remainingBalance } = invoice;
+  const { grandTotal, total, gst, amountPaid, discount, remainingBalance } =
+    invoice;
   const handleChange = (e, fieldName) => {
     const { value } = e.target;
     dispatch(
@@ -60,14 +61,16 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                 Total amount
               </Typography>
               <TextField
-                value={grandTotal}
-                onChange={(e) => handleChange(e, "grandTotal")}
+                disabled
+                value={total}
+                onChange={(e) => handleChange(e, "total")}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "30px",
                     borderRadius: "8px",
                     fontFamily: "Poppins",
                     fontWeight: 600,
+                    backgroundColor: "#D0D5D7",
                     "&.Mui-focused fieldset": {
                       borderColor: "#555555",
                     },
@@ -124,6 +127,32 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
                   },
                 }}
                 placeholder="Enter discount"
+              />
+            </Stack>
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Typography fontFamily={"Poppins"} fontWeight={500}>
+                Grand total
+              </Typography>
+              <TextField
+                disabled
+                value={grandTotal}
+                onChange={(e) => handleChange(e, "grandTotal")}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "30px",
+                    borderRadius: "8px",
+                    backgroundColor: "#D0D5D7",
+                    fontFamily: "Poppins",
+                    fontWeight: 600,
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#555555",
+                    },
+                  },
+                }}
               />
             </Stack>
             <Stack

@@ -28,6 +28,7 @@ function ProductDetails({ id }) {
   const [productValue, setProductValue] = useState("");
   console.log("productValue", productValue);
   const products = useSelector((state) => state.invoice.products);
+  const invoice = useSelector((state) => state.invoice.invoice);
   const product = products?.find((product) => product.id === id);
   const dispatch = useDispatch();
 
@@ -113,6 +114,25 @@ function ProductDetails({ id }) {
 
     return () => clearTimeout(timer);
   }, []);
+  //Calculating Total
+  useEffect(() => {
+    const handleTotal = () => {
+      const sum = products.reduce((acc, curr) => {
+        if (curr.productAmount !== 0)
+          return acc + parseFloat(curr.productAmount);
+      }, 0);
+      console.log("Sum", sum);
+      var total = isNaN(sum) ? invoice.total : parseFloat(sum);
+
+      // if (invoice.gst) {
+      //   const gst = 0.03 * total;
+      //   total += gst;
+      // }
+
+      dispatch(updateInvoiceField({ key: "total", value: total }));
+    };
+    handleTotal();
+  }, [products, dispatch]);
 
   return (
     <Stack padding={"16px"} spacing={"4px"}>
