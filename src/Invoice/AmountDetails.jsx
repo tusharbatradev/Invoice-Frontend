@@ -95,7 +95,7 @@ function AmountDetails({ formData, setFormData, generateInvoice }) {
               justifyContent={"space-between"}
             >
               <Typography fontFamily={"Poppins"} fontWeight={500}>
-                GST
+                GST (%)
               </Typography>
               <TextField
                 value={gst}

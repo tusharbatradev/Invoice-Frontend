@@ -13,7 +13,7 @@ const initialState = {
   invoice: {
     grandTotal: 0,
     total: 0,
-    gst: 0,
+    gst: 3,
     amountPaid: 0,
     discount: 0,
     remainingBalance: 0,
