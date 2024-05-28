@@ -9,14 +9,28 @@ import {
   Grid,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import {
+  updateOldGoldField,
+  updateOldSilverField,
+} from "../redux/Slices/invoiceSlice";
+import { useDispatch } from "react-redux";
 
 function OldProductDetails() {
   const [selectedOption, setSelectedOption] = useState("");
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const oldGold = useSelector((state) => state.invoice.oldGold);
+  const oldSilver = useSelector((state) => state.invoice.oldSilver);
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  function handleChangeOldSilver(e) {
+    const { name, value } = e.target;
+    dispatch(updateOldSilverField({ key: name, value: value }));
+  }
+  function handleChangeOldGold(e) {
+    const { name, value } = e.target;
+    dispatch(updateOldGoldField({ key: name, value: value }));
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -57,12 +71,14 @@ function OldProductDetails() {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Old silver quantity
+                Old silver weight
               </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                name="productQuantity"
+                name="weight"
+                value={oldSilver?.weight}
+                onChange={(e) => handleChangeOldSilver(e)}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -72,7 +88,7 @@ function OldProductDetails() {
                     },
                   },
                 }}
-                placeholder="Enter old silver quantity"
+                placeholder="Enter old silver weight"
               />
             </Grid>
             <Grid item xs={6}>
@@ -87,7 +103,9 @@ function OldProductDetails() {
               <TextField
                 fullWidth
                 variant="outlined"
-                name="productQuantity"
+                name="cost"
+                onChange={(e) => handleChangeOldSilver(e)}
+                value={oldSilver?.cost}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -110,12 +128,14 @@ function OldProductDetails() {
                 fontWeight={500}
                 color={"#0c1526"}
               >
-                Old gold quantity
+                Old gold weight
               </Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                name="productQuantity"
+                name="weight"
+                value={oldGold?.weight}
+                onChange={(e) => handleChangeOldGold(e)}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",
@@ -125,7 +145,7 @@ function OldProductDetails() {
                     },
                   },
                 }}
-                placeholder={"Enter old gold quantity"}
+                placeholder={"Enter old gold weight"}
               />
             </Grid>
             <Grid item xs={6}>
@@ -140,7 +160,9 @@ function OldProductDetails() {
               <TextField
                 fullWidth
                 variant="outlined"
-                name="productQuantity"
+                name="cost"
+                value={oldGold?.cost}
+                onChange={(e) => handleChangeOldGold(e)}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "40px",

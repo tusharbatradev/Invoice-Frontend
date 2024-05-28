@@ -2,20 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   customer: {
-    firstName: "",
-    lastName: "",
-    contactNumber: "",
-    address: "",
-    cityOrVillage: "",
-    pincode: "",
+    customerFirstName: "",
+    customerLastName: "",
+    customerContact: "",
+    customerAddress: "",
+    customerCity: "",
+    customerPincode: "",
   },
   products: [],
   invoice: {
-    grandTotal: 100,
-    gst: 20,
-    amountPaid: 100,
-    discount: 10,
-    remainingBalance: 10,
+    grandTotal: 0,
+    total: 0,
+    gst: 3,
+    amountPaid: 0,
+    discount: 0,
+    remainingBalance: 0,
+  },
+  oldGold: {
+    weight: 0,
+    cost: 0,
+  },
+  oldSilver: {
+    weight: 0,
+    cost: 0,
   },
 };
 
@@ -26,6 +35,14 @@ const invoiceSlice = createSlice({
     updateCustomerField: (state, action) => {
       const { key, value } = action.payload;
       state.customer[key] = value;
+    },
+    updateOldGoldField: (state, action) => {
+      const { key, value } = action.payload;
+      state.oldGold[key] = value;
+    },
+    updateOldSilverField: (state, action) => {
+      const { key, value } = action.payload;
+      state.oldSilver[key] = value;
     },
     fillProductsField: (state, action) => {
       const { id, field, value } = action.payload;
@@ -57,5 +74,7 @@ export const {
   updateInvoiceField,
   addProduct,
   removeProduct,
+  updateOldGoldField,
+  updateOldSilverField,
 } = invoiceSlice.actions;
 export default invoiceSlice.reducer;

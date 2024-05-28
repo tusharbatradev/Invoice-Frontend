@@ -28,6 +28,7 @@ function ProductDetails({ id }) {
   const [productValue, setProductValue] = useState("");
   console.log("productValue", productValue);
   const products = useSelector((state) => state.invoice.products);
+  const invoice = useSelector((state) => state.invoice.invoice);
   const product = products?.find((product) => product.id === id);
   const dispatch = useDispatch();
 
@@ -70,7 +71,8 @@ function ProductDetails({ id }) {
     );
   };
   const handleSelectProductName = (value) => {
-    dispatch(fillProductsField({ id, field: "product", value }));
+    console.log("value", value);
+    dispatch(fillProductsField({ id, field: "product", value: value?.label }));
   };
   const handleRemoveProduct = () => {
     dispatch(removeProduct({ id: id }));
@@ -113,6 +115,41 @@ function ProductDetails({ id }) {
 
     return () => clearTimeout(timer);
   }, []);
+  //Calculating Total, grandtotal
+  useEffect(() => {
+    const handleTotal = () => {
+      let sum = 0,
+        total = 0;
+      console.log("products", products);
+
+      sum = products.reduce((acc, curr) => {
+        if (curr.productAmount !== 0)
+          return acc + parseFloat(curr.productAmount);
+      }, 0);
+      console.log("Sum", sum);
+      total = isNaN(sum) ? invoice.total : parseFloat(sum);
+      let grandTotal = total;
+      if (invoice.gst !== "" || invoice.gst === 0) {
+        const gst = (parseFloat(invoice.gst) / 100) * total;
+        grandTotal = total + gst;
+      }
+      if (invoice.discount !== "" || invoice.discount === 0) {
+        grandTotal = grandTotal - parseFloat(invoice.discount);
+      }
+
+      dispatch(updateInvoiceField({ key: "total", value: total }));
+      dispatch(updateInvoiceField({ key: "grandTotal", value: grandTotal }));
+    };
+    handleTotal();
+  }, [products, dispatch, invoice.gst, invoice.discount]);
+
+  useEffect(() => {
+    console.log("Aagay andar");
+    if (products.length === 0) {
+      dispatch(updateInvoiceField({ key: "total", value: 0 }));
+      dispatch(updateInvoiceField({ key: "grandTotal", value: 0 }));
+    }
+  }, [products.length, dispatch]);
 
   return (
     <Stack padding={"16px"} spacing={"4px"}>
