@@ -1,8 +1,12 @@
 import { Stack, Typography, Box, IconButton, Divider } from "@mui/material"
 import { BackIcon, DeleteButtonIcon, DownloadIcon, EditedIcon, PrinterIcon, Share } from "../assets/CustomIcons/Icons"
+import { useNavigate } from "react-router-dom"
 
 
 function BillHeader() {
+
+    const navigate = useNavigate();
+    
     return (
         <Stack
             direction={'column'}
@@ -24,7 +28,7 @@ function BillHeader() {
                     alignItems: 'center',
                     gap: '8px'
                 }}>
-                    <IconButton>
+                    <IconButton onClick={() => navigate('/dashboard')}>
                         <BackIcon />
                     </IconButton>
                     Sales Invoice #1
