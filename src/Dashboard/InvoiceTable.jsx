@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Chip, Skeleton, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  Skeleton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Search, TransactionIcon } from "../assets/CustomIcons/Icons";
 import axios from "axios";
 import InvoiceCard from "./InvoiceCard";
@@ -149,7 +156,7 @@ export default function InvoiceData() {
           borderRadius: "16px",
         }}
       >
-        {rows.map((row) => (
+        {rows.reverse().map((row) => (
           <InvoiceCard
             key={row.id}
             date={row.invoiceDate}

@@ -22,8 +22,6 @@ function CustomerDetails() {
   } = customer;
   const handleChange = (e, fieldName) => {
     const { value } = e.target;
-    console.log(value);
-    console.log("fieldName", fieldName);
     dispatch(
       updateCustomerField({
         key: fieldName,

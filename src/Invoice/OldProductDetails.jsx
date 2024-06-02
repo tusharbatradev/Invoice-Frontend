@@ -7,12 +7,14 @@ import {
   TextField,
   Box,
   Grid,
+  Button,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   updateOldGoldField,
   updateOldSilverField,
+  updateInvoiceField,
 } from "../redux/Slices/invoiceSlice";
 import { useDispatch } from "react-redux";
 
@@ -22,7 +24,7 @@ function OldProductDetails() {
   const dispatch = useDispatch();
   const oldGold = useSelector((state) => state.invoice.oldGold);
   const oldSilver = useSelector((state) => state.invoice.oldSilver);
-
+  const invoice = useSelector((state) => state.invoice.invoice);
   function handleChangeOldSilver(e) {
     const { name, value } = e.target;
     dispatch(updateOldSilverField({ key: name, value: value }));
@@ -31,6 +33,18 @@ function OldProductDetails() {
     const { name, value } = e.target;
     dispatch(updateOldGoldField({ key: name, value: value }));
   }
+  const handleSubtraction = () => {
+    const total_old = Number(oldSilver?.cost) + Number(oldGold?.cost);
+
+    const revised_grand_total =
+      invoice.total +
+      invoice.total * (invoice.gst / 100) -
+      invoice.discount -
+      total_old;
+    dispatch(
+      updateInvoiceField({ key: "grandTotal", value: revised_grand_total })
+    );
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,6 +53,7 @@ function OldProductDetails() {
 
     return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <Stack spacing={1} alignItems="flex-start" padding={"16px"}>
@@ -178,6 +193,24 @@ function OldProductDetails() {
           </Grid>
         </Box>
       )}
+      <Stack paddingX={"16px"} spacing={"4px"} paddingY={"16px"}>
+        <Button
+          onClick={handleSubtraction}
+          sx={{
+            backgroundColor: "#0c1526",
+            height: "35px",
+            width: "100%",
+            fontFamily: "Poppins",
+            marginTop: "16px",
+            "&:hover": {
+              backgroundColor: "#1d2659",
+            },
+          }}
+          variant="contained"
+        >
+          Click here to Subtract old products cost from total amount.
+        </Button>
+      </Stack>
     </Stack>
   );
 }

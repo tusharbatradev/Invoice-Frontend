@@ -63,7 +63,6 @@ function LoginPage() {
 				"https://new-invoice-backend.onrender.com/user/login",
 				credentials
 			);
-			console.log(response);
 			if (response.status === 200) {
 				setSnackBarMessage(response.data.msg);
 				setSnackBarColor("green")
