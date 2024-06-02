@@ -10,44 +10,12 @@ import {
 import { Search, TransactionIcon } from "../assets/CustomIcons/Icons";
 import axios from "axios";
 import InvoiceCard from "./InvoiceCard";
-
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "customerFirstName",
-    headerName: "First name",
-    width: 150,
-  },
-  {
-    field: "customerLastName",
-    headerName: "Last name",
-    width: 150,
-  },
-  {
-    field: "customerContact",
-    headerName: "Contact Number",
-    width: 150,
-  },
-  {
-    field: "customerAddress",
-    headerName: "Address",
-    width: 150,
-  },
-  {
-    field: "invoiceDate",
-    headerName: "Date of Invoice",
-    width: 150,
-  },
-  {
-    field: "grandTotal",
-    headerName: "Total Amount",
-    width: 150,
-  },
-];
+import { debounce } from "../utils";
 
 export default function InvoiceData() {
-  const [rows, setRows] = useState([]);
-
+  const [invoices, setInvoices] = useState([]);
+  const [filteredInvoices, setFilteredInvoices] = useState([]);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -81,7 +49,8 @@ export default function InvoiceData() {
               };
             }
           );
-          setRows(formattedData);
+          setInvoices(formattedData);
+          setFilteredInvoices(formattedData);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -90,6 +59,20 @@ export default function InvoiceData() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    debounce(() => {
+      const filtered = invoices?.reverse().filter((invoice) => {
+        if (
+          `${invoice.customerFirstName} ${invoice.customerLastName}`
+            .toLowerCase()
+            .includes(search.toLowerCase())
+        )
+          return invoice;
+      });
+      setFilteredInvoices(filtered);
+    }, 1000)();
+  }, [search]);
+
   return (
     <Stack paddingX={"60px"} gap={"16px"}>
       <TextField
@@ -97,6 +80,7 @@ export default function InvoiceData() {
           endAdornment: <Search />,
         }}
         placeholder="Search for invoice by Customer's Name"
+        onChange={(e) => setSearch(e.target.value)}
         sx={{
           width: "100%",
           "& .MuiInputBase-root": {
@@ -156,7 +140,7 @@ export default function InvoiceData() {
           borderRadius: "16px",
         }}
       >
-        {rows.reverse().map((row) => (
+        {filteredInvoices.reverse().map((row) => (
           <InvoiceCard
             key={row.id}
             date={row.invoiceDate}
