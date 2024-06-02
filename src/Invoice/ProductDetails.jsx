@@ -26,7 +26,6 @@ import {
 function ProductDetails({ id }) {
   const [availableProducts, setAvailableProducts] = useState([]);
   const [productValue, setProductValue] = useState("");
-  console.log("productValue", productValue);
   const products = useSelector((state) => state.invoice.products);
   const invoice = useSelector((state) => state.invoice.invoice);
   const product = products?.find((product) => product.id === id);
@@ -35,8 +34,6 @@ function ProductDetails({ id }) {
   const handleUpdateField = (e) => {
     const { name, value } = e.target;
     let updatedAmount = product.productAmount; // Default to current amount
-    console.log("product", product);
-    console.log("amount", product.productAmount);
 
     if (
       name === "productWeight" ||
@@ -71,7 +68,6 @@ function ProductDetails({ id }) {
     );
   };
   const handleSelectProductName = (value) => {
-    console.log("value", value);
     dispatch(fillProductsField({ id, field: "product", value: value?.label }));
   };
   const handleRemoveProduct = () => {
@@ -120,13 +116,11 @@ function ProductDetails({ id }) {
     const handleTotal = () => {
       let sum = 0,
         total = 0;
-      console.log("products", products);
 
       sum = products.reduce((acc, curr) => {
         if (curr.productAmount !== 0)
           return acc + parseFloat(curr.productAmount);
       }, 0);
-      console.log("Sum", sum);
       total = isNaN(sum) ? invoice.total : parseFloat(sum);
       let grandTotal = total;
       if (invoice.gst !== "" || invoice.gst === 0) {
@@ -144,7 +138,6 @@ function ProductDetails({ id }) {
   }, [products, dispatch, invoice.gst, invoice.discount]);
 
   useEffect(() => {
-    console.log("Aagay andar");
     if (products.length === 0) {
       dispatch(updateInvoiceField({ key: "total", value: 0 }));
       dispatch(updateInvoiceField({ key: "grandTotal", value: 0 }));

@@ -107,7 +107,6 @@ export default function Table({ reload, setReload }) {
     try {
       // Convert the "availability" field to a Boolean value
       const availability = params.row.availability === "Available";
-      console.log("row", params);
 
       const updatedProduct = await axios.post(
         `https://new-invoice-backend.onrender.com/product/${params.row._id}`,
@@ -123,7 +122,6 @@ export default function Table({ reload, setReload }) {
         setSnackBarMessage(updatedProduct.data.msg);
         setSnackBar(true);
         setSnackBarColor("green");
-        console.log(updatedProduct);
       }
     } catch (error) {
       console.error("Error updating document:", error);
@@ -145,7 +143,6 @@ export default function Table({ reload, setReload }) {
 
   // Delete function for the product
   const handleDelete = async (params) => {
-    console.log("delet params", params);
     try {
       const deletedProduct = await axios.delete(
         `https://new-invoice-backend.onrender.com/product/${params.row._id}`,

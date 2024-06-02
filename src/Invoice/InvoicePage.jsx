@@ -11,13 +11,10 @@ import { useSelector, useDispatch } from "react-redux";
 function InvoicePage() {
   const products = useSelector((state) => state.invoice.products);
   const formData = useSelector((state) => state.invoice);
-  console.log("formData", formData);
-  console.log("invoice products", products);
   const dispatch = useDispatch();
   const handleAddNewProduct = (e) => {
     e.preventDefault();
     const newId = Math.max(...products.map((product) => product.id), 0) + 1;
-    console.log(newId);
     dispatch(
       addProduct({
         id: newId,
@@ -32,7 +29,6 @@ function InvoicePage() {
     );
   };
 
-  console.log("invoice slice data", products);
   const generateInvoice = () => {
     axios
       .post("https://new-invoice-backend.onrender.com/invoice/", formData, {
