@@ -45,7 +45,7 @@ export default function InvoiceData() {
                 discount: invoiceData.invoice.discount,
                 amountPaid: invoiceData.invoice.amountPaid,
                 remainingBalance: invoiceData.invoice.remainingBalance,
-                invoiceNumber: invoiceData.invoice.invoiceNumber,
+                invoice_id: invoiceData?.invoice_id,
               };
             }
           );
@@ -60,17 +60,19 @@ export default function InvoiceData() {
   }, []);
 
   useEffect(() => {
-    debounce(() => {
-      const filtered = invoices?.reverse().filter((invoice) => {
-        if (
-          `${invoice.customerFirstName} ${invoice.customerLastName}`
-            .toLowerCase()
-            .includes(search.toLowerCase())
-        )
-          return invoice;
-      });
-      setFilteredInvoices(filtered);
-    }, 1000)();
+    if (search !== "")
+      debounce(() => {
+        const filtered = invoices?.reverse().filter((invoice) => {
+          if (
+            `${invoice.customerFirstName} ${invoice.customerLastName}`
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          )
+            return invoice;
+        });
+        setFilteredInvoices(filtered);
+      }, 1000)();
+    else setFilteredInvoices([...invoices]);
   }, [search]);
 
   return (
@@ -144,7 +146,7 @@ export default function InvoiceData() {
           <InvoiceCard
             key={row.id}
             date={row.invoiceDate}
-            invoiceNumber={row.invoiceNumber}
+            invoice_id={row.invoice_id}
             customerFirstName={row.customerFirstName}
             customerLastName={row.customerLastName}
             customerCity={row.customerCity}
