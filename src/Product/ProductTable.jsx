@@ -23,6 +23,7 @@ import {
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from "@mui/x-data-grid";
+import ProductCard from "./ProductCard";
 
 export default function Table({ reload, setReload }) {
   const columns = [
@@ -220,52 +221,58 @@ export default function Table({ reload, setReload }) {
   }, []);
 
   return (
-    <Stack paddingX={2}>
-      {loading ? (
-        <Skeleton sx={{ height: "450px" }} />
-      ) : (
-        <Box height={400} padding={2}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            editMode="row"
-            rowModesModel={rowModesModel}
-            onRowEditStop={(params, event) => {
-              if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-                event.defaultMuiPrevented = true;
-              }
-            }}
-            pageSize={5}
-            checkboxSelection
-            disableRowSelectionOnClick
-          />
-        </Box>
-      )}
+    // <Stack paddingX={2}>
+    //   {loading ? (
+    //     <Skeleton sx={{ height: "450px" }} />
+    //   ) : (
+    //     <Box height={400} padding={2}>
+    //       <DataGrid
+    //         rows={rows}
+    //         columns={columns}
+    //         editMode="row"
+    //         rowModesModel={rowModesModel}
+    //         onRowEditStop={(params, event) => {
+    //           if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+    //             event.defaultMuiPrevented = true;
+    //           }
+    //         }}
+    //         pageSize={5}
+    //         checkboxSelection
+    //         disableRowSelectionOnClick
+    //       />
+    //     </Box>
+    //   )}
 
-      <Snackbar
-        ContentProps={{
-          sx: {
-            backgroundColor: snackBarColor,
-          },
-        }}
-        open={snackBar}
-        autoHideDuration={1000}
-        message={
-          <Typography
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              fontFamily: "Poppins",
-            }}
-          >
-            {snackBarMessage}
-          </Typography>
-        }
-        onClose={handleCloseSnackBar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      />
+    //   <Snackbar
+    //     ContentProps={{
+    //       sx: {
+    //         backgroundColor: snackBarColor,
+    //       },
+    //     }}
+    //     open={snackBar}
+    //     autoHideDuration={1000}
+    //     message={
+    //       <Typography
+    //         sx={{
+    //           width: "100%",
+    //           display: "flex",
+    //           alignItems: "center",
+    //           gap: "8px",
+    //           fontFamily: "Poppins",
+    //         }}
+    //       >
+    //         {snackBarMessage}
+    //       </Typography>
+    //     }
+    //     onClose={handleCloseSnackBar}
+    //     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+    //   />
+    // </Stack>
+    <Stack direction={"row"} gap={"8px"} flexWrap={"wrap"}>
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
     </Stack>
   );
 }

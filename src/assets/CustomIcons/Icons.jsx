@@ -65,10 +65,10 @@ export const CrossCancelIcon = () => {
   );
 };
 
-export const DeleteBasketIcon = () => {
+export const DeleteBasketIcon = (bgColor) => {
   return (
     <>
-      <DeleteIcon sx={{ color: "#df6161" }} />
+      <DeleteIcon sx={{ color: bgColor ? bgColor : "#df6161" }} />
     </>
   );
 };
