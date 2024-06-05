@@ -45,7 +45,7 @@ export default function InvoiceData() {
                 discount: invoiceData.invoice.discount,
                 amountPaid: invoiceData.invoice.amountPaid,
                 remainingBalance: invoiceData.invoice.remainingBalance,
-                invoice_id: invoiceData?.invoice_id,
+                invoice_number: invoiceData?.invoice_number,
               };
             }
           );
@@ -146,7 +146,7 @@ export default function InvoiceData() {
           <InvoiceCard
             key={row.id}
             date={row.invoiceDate}
-            invoice_id={row.invoice_id}
+            invoice_number={row.invoice_number}
             customerFirstName={row.customerFirstName}
             customerLastName={row.customerLastName}
             customerCity={row.customerCity}

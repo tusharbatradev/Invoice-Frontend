@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const InvoiceCard = ({
   date,
-  invoice_id,
+  invoice_number,
   customerFirstName,
   customerLastName,
   customerCity,
@@ -29,7 +29,7 @@ const InvoiceCard = ({
           variant="h6"
           sx={{ fontFamily: "Poppins", fontWeight: 600, fontSize: "14px" }}
         >
-          Invoice Id: {invoice_id}
+          Invoice number: {invoice_number}
         </Typography>
         <Typography
           variant="h6"
