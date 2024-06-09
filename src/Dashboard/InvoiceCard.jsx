@@ -10,6 +10,7 @@ const InvoiceCard = ({
   customerFirstName,
   customerLastName,
   customerCity,
+  _id,
 }) => {
   const navigate = useNavigate();
   return (
@@ -60,7 +61,7 @@ const InvoiceCard = ({
             {customerCity}
           </Typography>
           <Typography
-            onClick={() => navigate("bill")}
+            onClick={() => navigate(`bill/${_id}`)}
             sx={{
               marginTop: "12px",
               paddingY: "2px",

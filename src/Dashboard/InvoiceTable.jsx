@@ -32,7 +32,9 @@ export default function InvoiceData() {
             (invoiceData, index) => {
               return {
                 ...invoiceData.customer,
+
                 id: index + 1,
+                _id: invoiceData?.["_id"],
                 customerFirstName: invoiceData.customer.customerFirstName,
                 customerLastName: invoiceData.customer.customerLastName,
                 customerContact: invoiceData.customer.customerContact,
@@ -150,6 +152,7 @@ export default function InvoiceData() {
             customerFirstName={row.customerFirstName}
             customerLastName={row.customerLastName}
             customerCity={row.customerCity}
+            _id={row?.["_id"]}
           />
         ))}
       </Stack>

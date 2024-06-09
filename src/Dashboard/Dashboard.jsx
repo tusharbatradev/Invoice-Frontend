@@ -62,7 +62,7 @@ function Dashboard() {
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="invoice" element={<Invoice />} />
-            <Route path="bill" element={<Bill />} />
+            <Route path="bill/:id" element={<Bill />} />
             <Route path="product" element={<Product />} />
             <Route path="profile" element={<Profile />} />
           </Routes>
