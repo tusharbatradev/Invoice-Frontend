@@ -1,17 +1,19 @@
-import { Stack, Typography } from "@mui/material"
+import { Stack, Typography } from "@mui/material";
 
-function InvoiceDetails() {
-    return (<>
-        <Stack padding={1}>
-            <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={16}>
-               Invoice No. = 101
-            </Typography>
-            <Typography fontFamily={'Poppins'} fontWeight={400} fontSize={16}>
-                Invoice Date :- 08-03-2024
-            </Typography>       
-        </Stack>
-        
-    </>)
+function InvoiceDetails({ invoiceData }) {
+  const { invoice_number } = invoiceData;
+  return (
+    <>
+      <Stack padding={1}>
+        <Typography fontFamily={"Poppins"} fontWeight={400} fontSize={16}>
+          Invoice No. = {invoice_number}
+        </Typography>
+        <Typography fontFamily={"Poppins"} fontWeight={400} fontSize={16}>
+          Invoice Date :- 08-03-2024
+        </Typography>
+      </Stack>
+    </>
+  );
 }
 
-export default InvoiceDetails
+export default InvoiceDetails;
